@@ -1,773 +1,772 @@
-@font-face {
-    font-family: 'font2';
-    src: url('./assets/fonts/Ancient Medium.ttf');
-  }
-
-  @font-face {
-    font-family: 'font3';
-    src: url('./assets/fonts/Kastellar Wd Regular.ttf');
-  }
-
-  @font-face {
+@font-face 
+{
     font-family: 'font';
     src: url('./assets/fonts/Algerian Regular.ttf');
-  }
+}
 
-  * {
+$col20: #202020;
+$col20a: #202020ee;
+$col50: #505050;
+$col50a: #505050ee;
+$colbb: #bbbbbb;
+$color-someoneTitle:red;
+$color-firstTitle:gold;
+$color-title:fuchsia;
+
+$colheader: #5080bbee;
+
+* 
+{
     -moz-user-select: none;
     -webkit-user-select: none;
     -ms-user-select: none;
     user-select: none;
 }
-  
-body{
+html
+{
+    height:100%;
+}
+body
+{
+    height:100%;
     background-color: black;
     margin:0;
     overflow:hidden;
 }
-
-  p{
+p
+{
+    color:$colbb;
     font-family: 'font';
     margin:0;
-    color:#aa2020;
     font-size: 20px;
-    text-shadow: 4px 0 white, 0 1px white, 1px 0 white, 0 -1px white;
-  }
-
-.boosted1 div{
-    position: absolute;
-    bottom: 50px;
-    max-width: 330px;
-    left:10px;
+    text-align: center;
+    height:fit-content;
 }
-
-div .boosted2{
-    position: absolute;
-    bottom: 32px;
-    max-width: 330px;
-    left:8px;
-}
-
-div .row5
+*
 {
-    bottom: 12px;
+    z-index: 0;
+    height:auto;
+    transition: 0.1s;
 }
-
-.boosted2 p{
-    line-height:13px;
-    font-size:16px;
-    display:none;
+img
+{ 
+    width:100%;
+    height:100%;
 }
-
-.boosted1 p{
-    font-size: 65px;
-    line-height:45px;
-}
-
-.right div{
-    right:15px;
-}
-
-.left div p{
-    text-align: left;
-}
-.right div p{
-    text-align: right;
-}
-
-.summon:hover{
-    cursor:pointer;
-    filter: brightness(140%);
-}
-
-.footer img:hover{
-    cursor:pointer;
-    opacity:0.5;
-}
-
-.header div, .score{
-    width: 200px;
-height: 40px;
-border: 2px solid #bbb;
-background-color: rgba(20,20,20,0.5);
-border-radius: 20px;
-margin-top: 20px;
-text-align: center;
-position: relative;
-box-shadow: black -9px 8px 15px;
-}
-
-.header div p, .score .sc{
-    font-size: 35px;
-top: -4px;
-position: relative;
-color: white;
-text-shadow: 1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
-}
-
-.header div img, .score img{
-    height: 70px;
-left: -25px;
-position: absolute;
-top: -15px;
-}
-
-.recap img{
-    height:200px;
-}
-
-.connform{
-    padding: 50px 0px;
-background-color: rgba(20,20,20,0.9);
-border: 3px ridge #bbb;
-border-radius: 20px;
-box-shadow: black 10px 10px 10px;
-display:flex;
-justify-content: center;
-width:550px;
-}
-
-.connform p{
-color: white;
-text-shadow: 1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
-margin-bottom:3px;
-}
-
-input{
-    background-color: #404040;
-border: 3px ridge #bbb;
-border-radius: 20px;
-padding: 5px;
-width: 100%;
-text-align: center;
-color: white;
-box-shadow: black 10px 10px 10px;
-margin-bottom:10px;
-}
-
-
-button{
-    background-color: #404040;
-border: 3px ridge #bbb;
-border-radius: 20px;
-padding: 5px;
-width: 100px;
-text-align: center;
-color: white;
-box-shadow: black 10px 10px 10px;
-margin-top:10px;
-width: auto;
-padding: 5px 15px;
-white-space: nowrap;
-min-width:120px;
-}
-
-button:hover{
-    cursor:pointer;
-    opacity:0.5;
-}
-
-.disabled{
-    filter: grayscale(1);
-    pointer-events: none;
-}
-
-.disabledButton{
-    opacity:0.2;
-    pointer-events: none;
-}
-
-.options{
-    position: absolute;
-width: 160px;
-background-color: rgba(20,20,20,0.9);
-box-shadow: black 10px 10px 10px;
-border: 3px ridge #bbb;
-z-index: 2;
-left: -3px;
-padding-left: 20px;
-padding: 20px;
-overflow:hidden;
-top: -25px;
-}
-
-.options p{
-    color:white;
-    text-shadow: 1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
-}
-
-.options p:hover{
-    cursor:pointer;
-    opacity:0.5;
-}
-
-.red{
-    color:#aa2020 !important;
-}
-
-.tab2{
-    position: relative;
+div
+{
     display: flex;
-    max-width: 84%;
-    overflow-y: auto;
-    overflow-x: hidden;
-    white-space: pre;
-    flex-flow: wrap;
-    max-height: 545px;
-    left: 200px;
-    padding: 20px 20px;
+    justify-content: space-evenly;
 }
-
-.tab{
-    display: flex;
-white-space: pre;
-flex-flow: wrap;
-}
-
-.containerScore{
-    position: absolute;
-left: 22%;
-top: 180px;
-width: 915px;
-display: flex;
-justify-content: center;
-padding: 20px 0px;
-background-color: rgba(20,20,20,0.9);
-box-shadow: black 10px 10px 10px;
-border: 3px ridge #bbb;
-max-height: 450px;
-overflow-y: auto;
-overflow-x: hidden;
-}
-
-.nextBann
+button, input
 {
-    position: absolute;
-z-index: 4;
-font-size: 65px;
-white-space: nowrap;
-left: 380px;
-top: -35px;
-text-shadow: 4px 0 green, 0 2px green, 2px 0 green, 2px 2px green;
-color: white;
+    margin:10px 10px;
+    background-color:$col50a;
+    border:1px solid $colbb;
+    border-radius: 20px;
+    padding: 5px 15px;
+    box-shadow: black 10px 10px 10px;
+    text-align: center;
+    color:$colbb;
+    width: stretch;
 }
-
-.clickable:hover
-{
-    opacity:0.5;
+button:hover, .clickable:hover, app-cardperso:hover, .footer img:hover, .summons img:hover{
     cursor:pointer;
+    transform: scale(1.1);
+    z-index: 5;
 }
-
-.clickable3:hover
-{
-    opacity:0.9;
-    cursor:pointer;
-}
-
 .clickable2:hover
 {
-    opacity:0.4!important;
     cursor:pointer;
+    z-index: 5;
+    background-color:$col50;
 }
 
-.bigCard{
-    position: absolute;
-z-index: 5;
-left: 620px;
-top:120px;
-}
-
-.golden{
-    border: 3px ridge gold !important;
-    box-shadow: gold 0px 0px 20px !important;
-}
-
-.golden2{
-    border: 3px ridge gold !important;
-    box-shadow: gold 0px 0px 80px !important;
-}
-
-.alreadyPulled{
-    box-shadow:red 0px 0px 80px !important;
-}
-
-
-
-.grised{
-    opacity: 0.6;
-    filter: grayscale(100%);
-}
-
-.sell{
-    min-width: 200px;
-height: 590px;
-background-color: rgba(20,20,20,0.9);
-text-align: center;
-}
-
-.noClickable:hover{
-    cursor:unset!important;
-    opacity: 1!important;
-}
-
-.creatVente{
-    background-color: rgba(20,20,20,0.9);
-box-shadow: black 10px 10px 10px;
-border: 3px ridge #bbb;
-height: 560px;
-position: absolute;
-z-index: 5;
-left: 20px;
-width: 1530px;
-}
-
-.blocSell{
-    background-color: rgba(20,20,20,0.9);
-box-shadow: black 10px 10px 10px;
-border: 3px ridge #bbb;
-width: 210px;
-text-align: center;
-padding-top: 20px;
-margin: 20px;
-height:130px;
-}
-
-.header .succes{
-    position: absolute;
-left: -2px;
-top: 75px;
-z-index: 6;
-width: 300px;
-height: 500px;
-border-radius: unset;
-background-color: rgba(20,20,20,0.9);
-}
-
-.sellContener p{
-    color: white;
-    text-shadow: 4px 0 black , 0 2px black , 2px 0 black , 2px 2px black;
-}
-
-.header .succes .descSucces p{
+.tinyredtext
+{
+    color:red;
     font-size:12px;
 }
-
-.header .succes .nostyle{
-    width: 55px;
-right: 8px;
-position: absolute;
-bottom: -6px;
-border: unset;
-background-color: unset;
-box-shadow: unset;
-}
-
-.nbServ{
-    position: absolute;
-top: -20px;
-font-size: 50px;
-z-index: 2;
-box-shadow: black 10px 10px 10px;
-background-color: rgba(20,20,20,0.9);
-border: 3px ridge #bbb;
-padding: 0px 30px;
-left:20%;
-}
-
-.profile{
-    height: 632px;
-position: absolute;
-width: 96%;
-top: 94px;
-background-color: rgba(20,20,20,0.9);
-z-index: 6;
-border: 5px ridge #bbb;
-padding:30px;
-display:flex;
-}
-
-.servProfile{
-    width: 465px;
-border: 3px ridge #202020;
-box-shadow: black -9px 8px 15px;
-height: 100%;
-}
-
-.profileBotServs{
-    position: absolute;
-    bottom: 0px;
-    display: flex;
-    height: 220px;
-    bottom: 25px;
-    left:520px;
-}
-.profileBotServs img{
-    width:155px;
-}
-.profileBotServs div
+.noflex
 {
-    box-shadow: black -9px 8px 15px;
-    width:155px;
+    display:unset;
 }
-.profilePicture{
-    width: 80px;
-height: 80px;
-overflow: hidden;
-}
-.profilePicture img{
-    width: 80px;
-height: 80px;
-object-position: 0% -50%;
-object-fit: cover;
-transform: scale(2);
-}
-.profile p{
-    color:white;
-    text-shadow: none;
-}
-.profile .desc{
-    background-color: rgba(20,20,20,0.9);
-border: 3px ridge #bbb;
-border-radius: 20px;
-height: 120px;
-margin: 20px 0px;
-padding: 20px;
-}
-.profile .desc2{
-    background-color: rgba(20,20,20,0.9);
-border: 3px ridge #bbb;
-border-radius: 20px;
-height: 350px;
-width:275px;
-margin: 0px;
-padding: 20px;
-position: absolute;
-right:30px;
-}
-.profilePicture2
+.background
 {
     position: absolute;
-    left: 580px;
-    margin-top: 3px;
-    width: 50px;
-    height: 50px;
-    border: 2px ridge black;
-    overflow: hidden;
-}
-.profilePicture2 img{
-    width: 50px;
-height: 50px;
-object-position: 0% 0%;
-object-fit: cover;
-}
-.containerScore .clickable3:hover{
-    opacity:0.4;
-}
-.enhance{
-    position: absolute;
-left: 325px;
-padding:25px;
-background-color: rgba(20,20,20,0.9);
-border: 3px ridge #bbb;
-border-radius: 20px;
 }
 
-.bigCard .useTitle{
-    position: absolute;
-width: 100%;
-text-align: center;
-top:505px;
-}
-
-.useTitle p{
-    background-color: rgba(20,20,20,0.9);
+.bloc, .popup
+{
+    z-index: 1;
+    background-color: $col20a;
     box-shadow: black 10px 10px 10px;
+    border:3px ridge $col20;
+    border-radius: 20px;
+}
+.popup div:first-child
+{
+    width:90%;
+    padding:5%;
+}
+.popup
+{
+    position: absolute;
+}
+.tinydiv
+{
+    top:35%;
+    left:35%;
+    width:30%;
+    max-height:30%;
+    overflow-y:auto;
+    overflow-x:hidden;
+}
+.conteneur
+{
+    position: relative;
+    height:100%;
+}
+.contenu
+{
+    height: 70%;
+}
+//HEADER
+.header, .footer
+{
     border: 3px ridge #bbb;
-    color: white;
-    text-shadow: 4px 0 black , 0 2px black , 2px 0 black , 2px 2px black;
+    background-color:$colheader;
+    height:12%;
+    box-shadow: white 0px 0px 15px;
 }
-
-.bgDuel{
-    position:absolute;
-    width: 100%;
-    height: 100%;
-}
-
-.persoduel{
-    position: absolute;
-}
-.persoduel img{
-    height:200px;
-}
-.duelstats{
-    display: flex;
-justify-content: space-between;
-position: absolute;
-width: 100%;
-}
-.duelstats p{
-    color: white;
-    text-shadow: unset;
-    text-align: center;
-}
-.containerStatsDuel{
-    background-color: rgba(20,20,20,0.9);
-box-shadow: black 10px 10px 10px;
-border: 3px ridge #bbb;
-padding: 20px;
-  padding-left: 20px;
-border-radius: 20px;
-left: -15px;
-position: relative;
-padding-left: 40px;
-margin-top:10px;
-padding-top:5px;
-z-index:1;
-}
-.containerStatsDuel2{
-    background-color: rgba(20,20,20,0.9);
-box-shadow: black -10px 10px 10px;
-border: 3px ridge #bbb;
-color: white;
-padding: 20px;
-  padding: 20px;
-border-radius: 20px;
-right: -15px;
-position: relative;
-padding-right: 40px;
-margin-top:10px;
-padding-top:5px;
-z-index:1;
-}
-.containerRightDuel{
-    margin-left: 10px;
-}
-.containerRightDuel2{
-    margin-right: 10px;
-    text-align: right;
-}
-.containerRightDuel p{
-    width:140px;
-}
-.containerRightDuel2 p{
-    width:140px;
-}
-.containerbar{
-    background-color: rgba(20,20,20,0.9);
-    box-shadow: black 10px 10px 10px;
-    border: 2px ridge #bbb;
-    height: 18px;
-    top: 2px;
-    position: relative;
-    margin-left: 15px;
-    width:200px;
-    border-radius:5px;
-}
-.containerbar2{
-    background-color: rgba(20,20,20,0.9);
-    box-shadow: black 10px 10px 10px;
-    border: 2px ridge #bbb;
-    border-radius:5px;
-    height: 18px;
-    top: 2px;
-    position: relative;
-    margin-right: 15px;
-    width:200px;
-}
-.hp{
-    background:linear-gradient(#202020, #50cc50);
-width: 100%;
-height: 100%;
-}
-.np{
-    background:linear-gradient(#202020, #cccc50);
-width: 100%;
-height: 100%;
-}
-.sepia{
-    filter:sepia(1);
-}
-.titleDuel{
-    filter:drop-shadow(00px 00px 5px gold)!important;
-}
-.shadow {
-	position: absolute;
-	filter: brightness(0) blur(10px);
-    width:50%;
-    bottom:-43%;
-}
-.shadow {
-	position: absolute;
-	width: 110%;
-	bottom: -8px;
-	height: 20% !important;
-	left: -5%;
-}
-.boosted1 img{
-    width:346px;
-}
-.opa0{
-    opacity:0;
-}
-.damage{
-    -webkit-text-stroke: 1px;
-    -webkit-text-stroke-color: black;
-    position:absolute;
-    z-index:10;
-    color:red!important;
-    font-weight:bold;
-    font-size:40px;
-    border-radius:100%;
-}
-.profileBotServs2{
-    display:flex;
-    position: absolute;
-    height:220px;
-    top:75px;
-}
-.profileBotServs2 img{
-    width: 155px;
-    height:220px;
-}
-.profileBotServs2 .emptyserv
+.footer
 {
-    box-shadow: black -9px 8px 15px;
-    width:155px;
-    height:220px;
+    height:18%; 
 }
-.containerbar .tothp{
-    position: absolute;
-left: -135px;
-color: green!important;
--webkit-text-stroke: 1px;
-  -webkit-text-stroke-color: currentcolor;
--webkit-text-stroke-color: black;
-font-size: 35px;
-}
-.containerbar .tothp2{
-    position: absolute;
-right: -135px;
-color: darkred!important;
--webkit-text-stroke: 1px;
-  -webkit-text-stroke-color: currentcolor;
--webkit-text-stroke-color: black;
-font-size: 35px;
-}
-.cc{
-    background: radial-gradient(rgba(200,200,20,1), rgba(150,20,20,0));
-    border:10px dashed red;
-    padding:8px;
-}
-.fightInfos p{
-    text-align: center;
-    color:white;
-    text-shadow: unset;
-}
-.fightInfos{
-    background-color: rgba(20,20,20,0.9);
-    box-shadow: black 10px 10px 10px;
-    border: 2px ridge #bbb;
-    border-radius: 20px;
-    z-index: 9;
-    padding: 20px;
-    position: absolute;
-    left: 8%;
-    width: 80%;
-    top:5%;
-}
-.fightInfos .rowInfos{
-    display: flex;
-    height: 30%;
-}
-.fightInfos .blocInfos{
-    width: 20%;
-    background-color: rgba(20,20,20,0.9);
-    box-shadow: black 10px 10px 10px;
-    border: 2px ridge #bbb;
-    border-radius: 20px;
-    padding: 20px;
-    margin: 5px;
-    position:relative;
-    height:155px;
-}
-.histoPulls
+.header
 {
-    background-color: rgba(20,20,20,0.9);
-    box-shadow: black 10px 10px 10px;
-    border: 2px ridge #bbb;
-    border-radius: 20px;
-    z-index: 5;
-    padding: 20px;
-    position: absolute;
-    left: 35%;
-    top: -8%;
-    max-height: 128%;
-    overflow-y: scroll;
-}
-.notcool{
-    filter: grayscale(1) brightness(0.5)
-}
-.gigacool{
-    border-color:gold!important;
-}
-.boosts{
-    display: flex;
-    background-color: rgba(20,20,20,0.9);
-    box-shadow: black 10px 10px 10px;
-    border: 2px ridge #bbb;
-    padding-left: 20px;
-    border-radius: 20px;
-    padding: 7px;
-      padding-left: 7px;
-    position: relative;
-    top: -16px;
-}
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
-
-.mat-tooltip {
-    z-index: 8;
-    background-color: rgba(20,20,20,0.9);
-    box-shadow: black 10px 10px 10px;
-    font-size:15px;
-    font-family: 'font';
-    margin:0;
-    border-radius:20px;
-    padding:10px;
-}
-.nomNp{
-    font-size: 140px;
-position: absolute;
-left: 26%;
-top: 2%;
-width: 70%;
-text-align: center;
-color: #806000;
-text-shadow: 4px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
-left: 15%;
-opacity: 0.7;
-}
-.classduel .npUsed
-{
-    filter:drop-shadow(00px 00px 8px red)!important;
-}
-.datapvm{
-    position:absolute;
-    top: 150px;
-    left: 50px;
-    width:93%;
-}
-.datapvm div{
-    display:flex;
     justify-content: space-between;
 }
-.datapvm p{
-    color:white;
-    font-size: 50px;
-    text-shadow: 4px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+.successbtn
+{
+    width:90px;
+    margin:10px;
+    height:auto;
 }
-.persopvm p{
-    color:#900000;
-    text-shadow: 0px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
-
+.header p
+{
+    top: 25px;
+    position: relative;
+}
+.header .nbSucces{
+    position: absolute;
+    color: white;
+    background-color: red;
+    border: 2px solid white;
+    border-radius: 20px;
+    padding: 3px;
+    left: 80px;
+    top: 80px;
+    z-index: 5;
+}
+.numberwithimage
+{
+    position: relative;
+}
+.numberwithimage img
+{
+    width: 60px;
+    position: absolute;
+    left: -20px;
+    height: 65px;
+    z-index: 1;
+    top: 10px;
+}
+.numberwithimage p
+{
+    color:white;
+    width: 175px;
+    border: 3px ridge $colbb;
+    background-color: $col20a;
+    border-radius: 20px;
+}
+.pseudotitle
+{
+    position: relative;
+    top: -25px;
+}
+.header .pseudo
+{
+    font-size:40px;
+    color:white;
+}
+.success
+{
+    position:absolute;
+}
+//FORMATION
+.formation
+{
+    width:100%;
+    justify-content: unset;
+}
+.filters
+{
+    left: -15px;
+    position: relative;
+    padding: 0px 25px;
+    height: 95%;
+    top: 2%;
+    overflow-y: scroll;
+}
+.filters p
+{
+    font-size:19px;
+}
+.servants
+{
+    width: 90%;
+    max-height: 80%;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    display: flex;
+    white-space: pre;
+    flex-flow: wrap;
+    padding:40px;
+}
+.formation input{
+    width:15%;
+}
+.formation div p {
+    white-space: nowrap;
+}
+.red
+{
+    color: #aa2020;
+}
+.formation app-cardPerso
+{
+    height:fit-content;
+}
+.conteneurServants
+{
+    width: 86%;
+}
+//BANNER
+.banner
+{
+    position: relative;
+    width:80%;
+    height:80%;
+    top:10%;
+    box-shadow: green 0px 0px 50px;
+}
+.banner .backbanner
+{
+    position:absolute;
+    top:0px;
+    left:0px;
+    width:100%;
+    height:100%;
+}
+.bigbannerperso
+{
+    width:26%;
+    z-index: 1;
+}
+.banner .center
+{
+    padding:10px;
+    width: calc(100% - 23px);
+    height: calc(100% - 25px);
+}
+.zind2
+{
+    z-index: 2;
+}
+.centerbanner
+{
+    width: 48%;
+    height: fit-content;
+    position: relative;
+    top: 20%;
+}
+.centerbanner app-cardperso
+{
+    width:10%;
+}
+.nope
+{
+    pointer-events: none;
+}
+.summons
+{
+    z-index: 1;
+    height: 15%;
+    position: absolute;
+    bottom: -8%;  
+}
+.summons img
+{
+    margin: 0% 2%;
+}
+.nextBannerTime
+{
+    z-index: 5;
+    font-size: 40px;
+    color: white;
+    text-shadow: 4px 0 green, 0 1px green, 1px 0 green, 0 -1px green;
+    position: absolute;
+    top: -10px;
+}
+.header .cagnotte
+{
+    font-size: 14px;
+    position: absolute;
+    top: 60px;
+}
+.disabled
+{
+    pointer-events:none !important;
+    color: gray !important;
+    opacity: 0.5 !important;
+}
+.success
+{
+    width: 300px;
+    height: 500px;
+    top: 125px;
+}
+.success .data div
+{
+    margin:0;
+}
+.success .data
+{
+    max-height: 80%;
+    overflow-y: scroll;
+    display: block;
+}
+.data p
+{
+    font-size:12px;
+}
+.success .data .nom
+{
+    color:white;
+    font-size:18px;
+}
+//VIDEO
+.conteneurVideo
+{
+    position:relative;
+}
+.conteneurVideo video
+{
+    position:relative;
+}
+.group
+{
+    max-height:100%;
+}
+.carteInvoqued
+{
+    position: absolute;
+    top: 7%;
+    left: 42%;
+}
+.back
+{
+    position: absolute;
+    top: 0px;
+    width: 103%;
+    z-index: 2;
+}
+//RECAP
+.recap
+{
+    height:fit-content;
+    position: relative;
+    top:25%;
+    width:65%;
+}
+.recap .persosInvoqued
+{
+    width:100%;
+}
+.recap app-cardperso
+{
+    width:10%;
+}
+.recap .invoqButtons
+{
+    position:relative;
+    margin-top: 10%;
+}
+.recap .invoqButtons img
+{
+    width:20%;
+}
+.typeselection{
+    color: white;
+position: relative;
+top: 8px;
+text-shadow: 0px 0 red, 0 1px red, 1px 0 red, 0 -1px red;
+font-size: 25px;
+}
+//BIGCARD
+.bigCard
+{
+    position: absolute;
+    z-index: 9;
+    width:100%;
+    height:100%;
+}
+.bigCard
+{
+    pointer-events:none;
+}
+.bigCard .conteneur
+{
+    position: relative;
+    height: 540px;
+    top: 10%;
+}
+.bigCard .servant
+{
+    width: 350px;
+    pointer-events:all;
+}
+.bigCard .bloc
+{
+    pointer-events: all;
+    margin-right:40px;
+    padding:25px;
+}
+.bigCard .bloc .conteneurImg
+{
+    margin:20px 0px;
+    overflow:hidden;
+    max-height:50%;
+    max-width: 350px;
+}
+.bigCard .bloc img
+{
+    background-color: #050505;
+    position: relative;
+}
+.bigCard .bloc button
+{
+    margin: 2px;
+    box-shadow:unset;
+}
+.grised {
+    filter: grayscale(1);
+}
+.ascs{
+    margin:20px 0px;
+    height:212px;
+}
+.ascs img{
+    max-width:150px;
+}
+//FRIENDS
+.friends .numberwithimage
+{
+    top:12px;
+    margin-left:20px;
+}
+.friends .numberwithimage img
+{
+    width: 35px;
+    position: absolute;
+    left: -13px;
+    height: 35px;
+    z-index: 1;
+    top: -4px;
+}
+.friends .numberwithimage p
+{
+    width:120px;
+}
+.friends .bloc
+{
+    padding: 20px;
+    top: 5%;
+    position: relative;
+    max-height: 80%;
+    overflow-y: scroll;
+    height:fit-content;
+    overflow-x: hidden;
+}
+.friends .place{
+    font-size: 34px;
+margin-right: 20px;
+color: white;
+}
+.friends p
+{
+    font-size:15px;
+}
+.friends .icone
+{
+    margin: 0px 5px;
+}
+.friends .date
+{
+    position: relative;
+top: 15px;
+margin: 0px 10px;
+white-space: nowrap;
+}
+.friends .headers
+{
+    position: absolute;
+width: 100%;
+top: 0px;
+justify-content: unset;
+color: white;
+}
+.friends .headers p{
+    color:white;
+    text-align: left;
+}
+.friends .headers .classement{
+    position: relative;
+left: -10px;
+z-index: 12;
+width: 12%;
+}
+.friends .headers .quartz{
+    position: relative;
+left: 95px;
+width: 195px;
+}
+.friends .headers .joueur{
+    position: relative;
+left: 60px;
+}
+.friends .nomtitle
+{
+    min-width:200px;
+    width: stretch;
+    position: relative;
+    top:4px;
+}
+.friends .nomtitle p
+{
+    text-align: left;
+    color: white;
+}
+//PROFILE
+.histopulls
+{
+    width: 600px;
+max-height: 500px;
+left: 20%;
+top: 15%;
+padding: 25px;
+overflow-y: scroll;
+}
+.croix
+{
+    color: red;
+    border: 1px solid red;
+    padding: 0px 5px;
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    background-color: $col50;
+}
+.profile .bloc
+{
+    width: 90%;
+position: absolute;
+height: 60%;
+top: 15%;
+padding: 25px;
+justify-content: unset;
+}
+.profile .bigserv
+{
+    width:350px;
+    height: auto;
+    max-height: 90%;
+}
+.profile .firsttitle
+{
+    box-shadow: $color-firstTitle 0px 0px 30px;
+    border-color:$color-firstTitle;
+}
+.profile .title
+{
+    box-shadow: $color-title 0px 0px 30px;
+    border-color:$color-title;
+}
+.rightprofile
+{
+    width: 65%;
+    position: relative;
+    left: 4%;
+}
+.botservs
+{
+    width:100%;
+}
+.botserv
+{
+    width:10%;
+}
+.botserv .noservassigned
+{
+    border: 2px ridge $col20;
+}
+.botserv *{
+    width: 100%;
+    background-color: $col50;
+    height: 150px;
+}
+.compo .noservassigned
+{
+    width: 100%;
+    background-color: $col50;
+    height: 150px;
+    border:1px solid black;
+}
+.composerv{
+    width: 100%;
+    background-color: $col50;
+    height: fit-content;
+}
+.profile .nomtitle
+{
+    position: relative;
+    top: -3px;
+left: 10px;
+max-width: 300px;
+}
+.profile .topright
+{
+    height: 70%;
+}
+.profile .compo
+{
+    width: 90%;
+    justify-content: unset;
+    height: fit-content;
+    margin: 0px 5%;
+}
+.profile .droite
+{
+    width: 90%;
+    justify-content: unset;
+    height: fit-content;
+    margin: 0px 5%;
+}
+.profile .compo .botserv
+{
+    width:20%;
+}
+.profile .nomtitle p
+{
+    text-align: left;
+    color: white;
+}
+.profile .topinfos
+{
+    justify-content: unset;
+}
+.cantClick{
+    pointer-events: none!important;
+}
+.histopulls .grised2
+{
+    filter: grayscale(1) brightness(0.5);
+}
+//FOOTER
+.footer img
+{
+    width: 11%;
+    height: 80%;
+    position: relative;
+    top: 8%;
+}
+//SHOP
+.shop .bloc{
+    height: 85%;
+    top: 3%;
+    position: relative;
+    padding: 20px;
+    margin-right:20px;
+}
+.shop .numberwithimage img
+{
+    width:45px;
+    height:45px;
+    top:-7px;
+    left:0px;
+}
+.shop .propose{
+    border-right:1px solid #bbb;
+    padding-right:20px;
+    height:100%;
+    min-width:200px;
+}
+.shop .price{
+    padding-left:20px;
+    height:100%;
+    min-width:200px;
+}
+.height93
+{
+    height:93%;
+}
+.shop{
+    width:100%;
+}
+.shop .ventes
+{
+    width: 80%;
+overflow-x: scroll;
+justify-content: unset;
+}
+.shop input{
+    position: relative;
+    top:-8px;
+}
+//PVM
+.pvm
+{
+    position: absolute;
+left: 0px;
+top: 0px;
+width: 100%;
+height: 100%;
+}
+.pvm .background
+{
+    min-width: 100%;
+    min-height: 100%;
+    max-height:150%;
+    bottom:0px;
+    left:0px;
+    width:unset;
+    height:unset;
+}
+.pvm .perso
+{
+    position: absolute;
+    height:fit-content;
+    width:auto;
+}
+.pvm .conteneurperso
+{
+    position: absolute;
+    left:0px;
+    top:0px;
+    width:100%;
+    height:100%;
+}
+.pvm *{
+    transition:unset;
 }

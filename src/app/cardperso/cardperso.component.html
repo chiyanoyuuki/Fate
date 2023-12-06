@@ -1,0 +1,14 @@
+<div 
+[ngClass]="[height,titles,grised]"
+[class.showTitle]="showTitle"
+class="container" 
+(mouseenter)="show=true" 
+(mouseleave)="show=false">
+
+    <img class="perso" src="{{image?image:perso.img1}}" draggable="false"/>
+    <img    *ngIf="showBorder" class="border" src="./assets/images/borders/{{perso.level}}.png" draggable="false"/>
+    <p      *ngIf="show||showName" class="nom">{{perso.nom}}</p>
+    <p      *ngIf="(level&&level.level>0)&&(show||showLevel)" class="level">{{level.level}}</p>
+    <p      *ngIf="(show||showQte)&&perso.qte>0" class="qte">{{perso.qte}}</p>
+    <img    *ngIf="perso.classe&&(show||showClasse)" class="classe" src="./assets/images/classes/{{perso.classe}}.png" draggable="false">
+</div>

@@ -1,740 +1,587 @@
-    <!-- <PVM -->
+<img class="background" draggable="false" src="./assets/images/{{background}}.png"/>
+
+
+<!--<connection-->
+<div class="connection" *ngIf="page=='connect'">
+  
+  <div class="popup tinydiv">
+    <div class="noflex">
+      <p>Nom de compte :</p>
+      <input id="connect-pseudo" type="text" />
+      <p>Mot de passe :</p>
+      <input id="connect-mdp" type="password"/>
+      <p class="tinyredtext" *ngIf="error!=''">{{error}}</p>
+      <div>
+        <button (click)="connect(false,false)">Connect</button>
+        <button (click)="connect(true,false)">Create</button>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!--<bigcard-->
+<div *ngIf="bigCard" class="bigCard">
+  <div class="conteneur">
+    <div class="bloc noflex">
+      <p>{{bigCard.nom}}</p>
+      <p>{{bigCard.classe}}</p>
+      <p>NP : {{bigCard.np?bigCard.np.type:'Aleat'}}</p>
+      <p>True master : {{getTrueMaster()}}</p>
+      <div *ngIf="!changeAscension" class="conteneurImg">
+        <img src="{{getSprite(user.id,bigCard)}}" [ngClass]="haveServant(bigCard)"/>
+      </div>
+      <div *ngIf="changeAscension" class="ascs">
+        <img *ngIf="bigCard.img1" src="{{bigCard.img1}}" (click)="changeAsc(0)" class="clickable"/>
+        <img *ngIf="bigCard.img2&&getLevelServant(user.id,bigCard.id).level>30" src="{{bigCard.img2}}" (click)="changeAsc(1)" class="clickable"/>
+        <img *ngIf="bigCard.img3&&getLevelServant(user.id,bigCard.id).level>60" src="{{bigCard.img3}}" (click)="changeAsc(2)" class="clickable"/>
+        <img *ngIf="bigCard.img4&&getLevelServant(user.id,bigCard.id).level>90" src="{{bigCard.img4}}" (click)="changeAsc(3)" class="clickable"/>
+      </div>
+      <button [class.disabled]="!gotTitle()" (click)="useTitle()">Use as Title</button>
+      <button *ngIf="gotServant(bigCard)" [class.disabled]="getXpButtonText()=='Lvl max reached'||getCELeft()==0||(getXpButtonText()=='Ascend'&&bigCard.qte<2)" (click)="getXpButtonText()=='Ascend'?ascend():xpServ()">{{getXpButtonText()}}</button>
+      <button (click)="changeAscension=!changeAscension" [class.disabled]="!getLevelServant(user.id,bigCard.id)||getLevelServant(user.id,bigCard.id).level<31">Change ascension</button>
+    </div>
     
-    <div *ngIf="state=='pvm'">
+    <div class="servant">
+      <app-cardperso
+        (click)="setBigCard(undefined)"
+        [height]="'big'"
+        [image]="getImg(user.id,bigCard)"
+        [titles]="getTitles(user,bigCard)"
+        [showTitle]="true"
+        [level]="getLevel(bigCard)"
+        [showLevel]="true"
+        [showQte]="true"
+        [grised]="haveServant(bigCard)"
+        [perso]="bigCard">
+      </app-cardperso>
+    </div>
+  </div>
+</div>
 
-      <div class="fightInfos clickable3" (click)="classementPvm=false;" *ngIf="classementPvm"
-      style="left:35%;width:unset;max-height:80%;max-height:80%;overflow-y: scroll;">
-        <p style="font-size: 50px;">Classement PVM {{modepvm}}</p>
-        <div *ngFor="let user of getUsersClassement();let i=index" class="rowInfos">
-          <div style="padding:0px 40px;width:100%;display:flex;justify-content: space-between;">
-            <p style="font-size: 30px">{{i+1}}</p>
-            <p style="font-size: 30px;position: absolute;width: 80%;text-align: center;">{{user.nom}}</p>
-            <p style="font-size: 30px">{{modepvm=='easy'?(user.pvm_easy+1):(user.pvm_hard+1)}}</p>
-          </div>
-        </div>
+<div class="popup histopulls noflex" *ngIf="popup&&popup.type=='histopulls'">
+  <p class="croix clickable" (click)="popup=undefined">x</p>
+  <div *ngFor="let histo of popup.data" class="noflex">
+    <p>{{histo.date | date:'HH:mm:ss - dd/MM/aaaa' }}</p>
+    <div>
+      <app-cardperso *ngFor="let servant of histo.pulls"
+        [class.grised2]="servant.level<4||servant.nom=='Craft Essence'"
+        (click)="setBigCard(servant)"
+        [height]="'tiny'"
+        [titles]="getTitles(user,servant)"
+        [level]="getLevel(servant)"
+        [showBorder]="false"
+        [showName]="false"
+        [showClasse]="false"
+        [perso]="servant">
+      </app-cardperso>
+    </div>
+  </div>
+</div>
+
+<div class="bloc success noflex" *ngIf="showSuccess">
+    <div class="data noflex">
+      <div class="noflex" *ngFor="let succes of successToClaim">
+        <p class="nom">{{succes.nom}}</p>
+        <p class="desc">{{succes.desc}}</p>
       </div>
+    </div>
+    <button (click)="claimAll()">Claim all ({{nbSuccess()}})</button>
+</div>
 
-      <div class="datapvm">
-        <div style="justify-content: center;">
-          <p>{{getPvmName()}}</p>
-        </div>
+<!--<PVM-->
+<div *ngIf="page=='pvm'" class="pvm">
+  <img class="background" src="./assets/images/pvm/0.png"/>
+
+  <div [@idle]="{value:idleState[i].state, params:{dest:idleState[i].value}}" class="conteneurperso" *ngFor="let servant of user.compo;let i=index" [style.z-index]="5-i">
+    <img class="perso" [style.left]="100*i+'px'" [style.transform]="servant.tunr?'unset':'scaleX(-1)'" [style.height]="250+servant.diff+'px'" [style.bottom]="75*i+(servant.replace?servant.replace:0)+'px'" src="{{servant.sprite1}}" />
+  </div>
+    
+  <div [@idle]="{value:idleState[i+5].state, params:{dest:idleState[i+5].value}}" class="conteneurperso" *ngFor="let servant of team2;let i=index" [style.z-index]="5-i">
+    <img class="perso" [style.right]="100*i+'px'"  [style.transform]="servant.turn?'scaleX(-1)':'unset'" [style.height]="250+servant.diff+'px'" [style.bottom]="75*i+(servant.replace?servant.replace:0)+'px'" src="{{servant.sprite1}}" />
+  </div>
+
+  <!-- TAILLE PERSOS
+  <div class="noflex bloc" style="width: 15%;height:fit-content;z-index:2">
+    <div *ngFor="let action of actions;let i=index">
+      <button [class.disabled]="block(false,i)" style="width:20%" (click)="setaction(false,i)">-</button>
+      <p style="width:60%">{{action}}</p>
+      <button [class.disabled]="block(true,i)" style="width:20%" (click)="setaction(true,i)">+</button>
+    </div>
+    <div>
+      <input type="text" [(ngModel)]="perso.np.anim"/>
+      <input type="text" [(ngModel)]="perso.np.coloranim"/>
+    </div>
+    <button (click)="showData()">Valider</button>
+  </div>
+
+  <div class="bloc" style="position: absolute;height:100%;bottom:0px"></div>
+
+  <div style="position:absolute;bottom:150px;display:block;justify-content: unset;">
+    <img style="width:auto;position: relative;bottom:0px" *ngFor="let serv of persos;let i=index" [style.left]="0+(i==2?serv.decalageX[ascensionActuelle]:serv.decalageX[0])+'px'" [style.height]="250+(i==2?serv.taille[ascensionActuelle]:serv.taille[0])+'px'" [style.bottom]="(i==2?serv.decalageY[ascensionActuelle]:serv.decalageY[0])+'px'" src="{{getAsensionSprite(i)}}" >
+  </div>
+  -->
+  
+  </div>
+
+<!--<conteneur-->
+<div *ngIf="page!='connect'&&page!='pvm'" class="conteneur noflex">
+  <!--<header-->
+  <div class="header">
+    <img [class.disabled]="successToClaim.length==0" class="clickable successbtn" draggable="false" (click)="showSuccess=!showSuccess" src="./assets/images/succes.png"/>
+    <p *ngIf="successToClaim.length>0" class="nbSucces">{{successToClaim.length}}</p>
+    <div class="numberwithimage">
+      <img draggable="false" src="./assets/images/graal.png"/>
+      <p>{{user.score}}</p>
+    </div>
+    <div></div>
+    <div class="pseudotitle noflex">
+      <p class="pseudo">{{user.nom}}</p>
+      <p class="title">{{user.title}}</p>
+    </div>
+    <div></div>
+    <div class="numberwithimage">
+      <img draggable="false" src="./assets/images/quartz.png"/>
+      <p>{{user.quartz}}</p>
+      <p matTooltip="1 quartz every 5 min, even if deconnected !" (click)="recupererCagnotte()" [class.disabled]="cagnotte==0" class="clickable cagnotte">Get Stock : {{cagnotte}} {{cagnotte==60?'(MAX)':''}}</p>
+    </div>
+    <div></div>
+    <div></div>
+  </div>
+  <!--<contenu-->
+  <div class="contenu">
+    <!--<formation-->
+    <div *ngIf="page=='formation'" class="formation">
+      <div class="bloc filters noflex">
+        <p [class.clickable]="filter!=''" [style.display]="i>14&&selectionPerso?'none':'block'" [class.red]="(classes.includes(filter)&&!filters.includes(filter))||(!classes.includes(filter)&&filterSpec!=filter)" (click)="addFilter(filter)" *ngFor="let filter of formationFilters;let i=index">{{filter!=""?filter:'&nbsp;'}}</p>
+      </div>
+      <div class="noflex conteneurServants">
         <div>
-          <p [class.red]="modepvm=='hard'" (click)="modepvm=='easy'?modepvm='hard':modepvm='easy'" class="clickable" style="text-decoration: underline;">Mode {{modepvm}}</p>
-          <button [class.disabledButton]="getPvmLevel()==0" (click)="launchDuelPvm(true)">Farm</button>
-          <button (click)="classementPvm=!classementPvm">Classement</button>
-          <button (click)="launchDuelPvm(false)">Fight</button>
-          <p>Etage {{(getPvmLevel()+1) + '/' + (getPvmMaxLevel()+1)}}</p>
+          <input type="text" [(ngModel)]="search" placeholder="Recherche.." (ngModelChange)="getFormationServants()" />
+          <p *ngIf="selectionPerso" class="typeselection">{{selectionPerso.page=='shop'?'Selecting for sell':'Selecting for profile'}}</p>
         </div>
-        <div>
-          <div style="display:flex">
-            <p style="font-size: 20px;">Recompense : {{getPvmRec()}}</p>
-            <img style="width:20px;" draggable="false" src="./assets/images/quartz.png"/>
-          </div>
-          <p style="font-size: 20px;color: #aaa;" *ngIf="getPvmLevel()>getPvmMaxLevel()">Pas encore de nouvel étage</p>
-        </div>
-      </div>
-
-      <div class="desc2" style="position: absolute;top:40%">
-        <div style="display:flex;justify-content: space-between;">
-          <div style="display:flex;">
-            <button (click)="getPvp();getPvm();" style="margin:0;">Refresh</button>
-            <button (click)="showinfo=true" style="margin:0;">Passifs</button>  
-            <button (click)="showinfo2=true" style="margin:0;">Avantages</button> 
-          </div>
-        </div>
-        <div style="display:flex;position: absolute;margin-top: 7px;" class="clickable" (click)="setProfile(id)">
-          <div *ngFor="let serv of myprofile.comp;let i=index" style="position:relative">
-            <div [class.golden]="myprofile.titlescompo[i]==1" class="profilePicture2" style="margin:0;position: relative;left:0px;border: 4px ridge #404040;">
-              <img draggable="false" class="profilePicture" src="{{getImg(id,serv)}}"/>
-            </div>         
-          </div>
-          <div class="emptyserv" [class.clickable]="profile==id" (click)="profile==id?clickServantProfileCompo(i):null" *ngFor="let item of [].constructor(4-myprofile.compo.length);let i=index"></div>
-        </div>
-      </div>
-
-      <div style="z-index: 2;padding-left: 60px;left: -21px;border-color: rgb(0,80,0);position: absolute;bottom: 45%;top: unset;height: 40px;" class="boosts">
-        <img matTooltip="{{boost.desc}}" class="clickable3 bonusme" style="pointer-events:unset;width:40px;height:40px;" *ngFor="let boost of getBonuses(0)" src="./assets/images/classes/{{boost.classe}}.png"/>
-        <p style="position: relative;top:6px" *ngIf="getBonuses(0).length==0">No bonus</p>
-      </div>
-      <div *ngIf="profile!=id" style="  z-index: 2;padding-right: 60px;right: -15px;border-color: rgb(80,0,0);left: unset;position: absolute;bottom: 45%;top: unset;height: 40px;" class="boosts bonushe">
-        <img matTooltip="{{boost.desc}}" class="clickable3" style="width:40px;height:40px;" *ngFor="let boost of getBonusesPvm()" src="./assets/images/classes/{{boost.classe}}.png"/>
-        <p style="position: relative;top:6px" *ngIf="getBonusesPvm().length==0">No bonus</p>
-      </div>
-
-      <div class="persopvm" style="position:absolute;display:flex;justify-content: space-evenly;width:80%;top:50%;left:10%">
-        <div *ngFor="let perso of getPersoPvm()">
-          <div style="display:flex;position: absolute;top: -40px;z-index:6">
-            <img matTooltip="{{perso.classe}}" class="clickable3" style="width:40px;height:40px;position: absolute;left: -50px;top: -7px;" src="./assets/images/classes/{{perso.classe}}.png"/>
-            <p style="margin-right:5px;">({{modepvm=='easy'?perso.niveau:(perso.niveau+100)}})</p>
-            <p>{{perso.nom}}</p>
-          </div>
-          <img src="{{getSprite(perso)}}" style="height:200px;" [style.scale]="perso.scale" [style.transform]="perso.turn?'scaleX(-1)':'unset'">
+        
+        <div class="servants">
+          <app-cardperso *ngFor="let perso of formationServants"
+              (click)="setBigCard(perso)"
+              [titles]="getTitles(user,perso)"
+              [showTitle]="selectionPerso?true:false"
+              [grised]="haveServant(perso)"
+              [image]="getImg(user.id,perso)"
+              [level]="getLevel(perso)"
+              [showClasse]="false"
+              [height]="'normal'"
+              [showBorder]="selectionPerso?(haveServant(perso)=='grised2'?false:true):true"
+              [showName]="selectionPerso?(haveServant(perso)=='grised2'?false:true):true"
+              [perso]="perso">
+          </app-cardperso>
         </div>
       </div>
     </div>
-
-
-    <!-- <DUEL -->
-    
-    <div *ngIf="state=='duel'" class="classduel">
-      
-    <div style="position:absolute;width:100%;display: flex;justify-content: center;top:6%;z-index: 8;">
-      <button (click)="endFight3()">Surrender</button>
-    </div>
-
-      <img class="bgDuel" src="./assets/images/{{fightpvm?'pvm/'+getPvmBg():'bgDuel'}}.png" [style.filter]="npUsed!='0'?'invert(1)':'unset'" [style.left]="decalbgduelx+'px'" [style.top]="decalbgduely+'px'"/>
-
-      <div *ngIf="test" style="position:absolute;left:815px;top:534px;">
-        <div style="display: flex;"><button (click)="idpersotest=idpersotest-1;scaletest=getPersoTest().scale;">-</button><p>{{idpersotest}}</p><button (click)="idpersotest=idpersotest+1;scaletest=getPersoTest().scale;">+</button></div>
-        <img draggable="false" src="{{getSpritePerso()}}" style="height:200px;pointer-events: none;" [style.scale]="scaletest"/>
-        <div style="display: flex;"><button (click)="scaletest=scaletest-0.1">-</button><p>{{scaletest}}</p><button (click)="scaletest=scaletest+0.1">+</button></div>
-      </div>
-
-      <div [style.display]="npUsed!='0'?'unset':'none'" [@npUsed]="npUsed" style="position:absolute;width:120%;z-index: 9;top:20%;">
-        <img src="./assets/images/fondNp.png" style="opacity:0.8;width:100%"/>
-        <div style="position:absolute;width:120%;height:300px;top:20%;display: flex;justify-content: center;">
-          <img src="{{personp?personp.sprite1:'./assets/images/none.png'}}" style="left: -7%;position: relative;height: 1000px;top: -95%;"/>
+    <!--<banner-->
+    <div *ngIf="page=='banner'" class="banner">
+      <img class="backbanner nope" draggable="false" src="./assets/images/backBanner.png"/>
+      <div class="backbanner center" *ngIf="banner">
+        <app-cardperso class="bigbannerperso"
+          (click)="setBigCard(banner.boost_5)"
+          [showBorder]="false" 
+          [titles]="getTitles(user,banner.boost_5)"
+          [level]="getLevel(banner.boost_5)"
+          [grised]="haveServant(banner.boost_5)"
+          [height]="'big'"
+          [perso]="banner.boost_5">
+        </app-cardperso>
+        <div class="noflex centerbanner">
+          <div>
+            <app-cardperso *ngFor="let perso of banner.boost_5_group" class="littlebannerperso" 
+              (click)="setBigCard(perso)"
+              [showBorder]="false" 
+              [showName]="false"
+              [grised]="haveServant(perso)"
+              [titles]="getTitles(user,perso)"
+              [level]="getLevel(perso)"
+              [showClasse]="false"
+              [height]="'tiny'"
+              [perso]="perso">
+            </app-cardperso>
+          </div>
+          <div>
+            <app-cardperso *ngFor="let perso of banner.boost_4_group" class="littlebannerperso" 
+              (click)="setBigCard(perso)"
+              [showBorder]="false" 
+              [showName]="false"
+              [titles]="getTitles(user,perso)"
+              [grised]="haveServant(perso)"
+              [level]="getLevel(perso)"
+              [showClasse]="false"
+              [height]="'tiny'"
+              [perso]="perso">
+            </app-cardperso>
+          </div>
         </div>
-        <p class="nomNp" *ngIf="personp">{{personp.np.nom}}</p>
+        <app-cardperso class="bigbannerperso"
+          (click)="setBigCard(banner.boost_4)"
+          [showBorder]="false" 
+          [level]="getLevel(banner.boost_4)"
+          [height]="'big'"
+          [grised]="haveServant(banner.boost_4)"
+          [titles]="getTitles(user,banner.boost_4)"
+          [perso]="banner.boost_4">
+        </app-cardperso>
       </div>
-
-      <div style="position: absolute;left:0px;top:0px;">
-        <img *ngFor="let np of nps" [style.left]="np.x+'px'" [style.top]="np.y+'px'" src="./assets/images/np/{{personp.np.type=='Support'?'Support':personp.classe}}.png" style="position:absolute;width:200px;z-index:10;" [style.scale]="1+np.scale" [style.transform]="getTransform(np)"/>
+      <img class="backbanner nope zind2" draggable="false" src="./assets/images/frontBanner.png"/>
+      <p class="nextBannerTime">Time until next banner : {{getTimeToChangeBanner()}}</p>
+      <div class="summons">
+        <img [class.disabled]="user.quartz<3" (click)="summon(1)" src="./assets/images/summon1.png" />
+        <img [class.disabled]="user.quartz<30" (click)="summon(10)" src="./assets/images/summon.png" />
       </div>
-      
-      
-      <div class="duelstats">
-
-        <p [class.cc]="dmg.cc" [style.color]="dmg.color+'!important'" [style.font-size]="dmg.cc?(dmg.size+20)+'px!important':dmg.size+'!important'" class="damage" *ngFor="let dmg of dmgs" [@dmgAnimation]="{value:dmg.anim, params:{pos:dmg.pos}}" [style.left]="dmg.left+'px'">{{dmg.dmg}}</p>
-
-        <div>
-          <p class="containerStatsDuel" style="padding:0px">{{getFightName(id)}}</p>
-          <div *ngFor="let perso of team1;let i=index" class="containerStatsDuel" [style.opacity]="perso.pdv>0?1:0.7">
-            <div style="display:flex;"><p>{{perso.nom}}</p><div style="display: flex;position: absolute;right: 10px;top: 2px;"><p *ngFor="let item of [].constructor(perso.level);">☆</p></div></div>
-            <div style="display:flex;">
-              <p style="bottom: 12px;position: absolute;font-size: 17px;width: 25px;text-align: center;color: white;text-shadow: 1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
-              background-color: green;border-radius: 20px;border: 2px ridge #202020;left: 80px;z-index: 2;">{{perso.niveau?perso.niveau:0}}</p>
-              <div [class.golden]="titlesduel[i]==1" class="profilePicture2" style="margin:0;position: relative;left:0px;border: 4px ridge #404040;">
-                <img draggable="false" class="profilePicture" src="{{getImg(id,perso)}}"/>
+    </div>
+    <!--<video-->
+    <div [style.display]="page=='summon'?'unset':'none'" class="conteneurVideo">
+      <div class="group">
+        <video (click)="passVideo()" muted id="video1" (ended)="videoEnd()">
+          <source src="./assets/videos/3star.mp4" type='video/mp4'/>
+        </video>
+        <div *ngIf="servantInvoquing" class="carteInvoqued nope" [@video]='videoState' [style.display]="videoState!='0'?'unset':'none'">
+          <app-cardperso 
+            [height]="'video'"
+            [titles]="getTitles(user,servantInvoquing)"
+            [showTitle]="true"
+            [perso]="servantInvoquing">
+          </app-cardperso>
+          <div *ngIf="servantInvoquing.nom!='Craft Essence'" [@back]='backState' class="back" >
+            <img src="{{getBack()}}" />
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--<RECAP-->
+    <div *ngIf="page=='recap'" class="recap noflex">
+      <div class="persosInvoqued">
+        <app-cardperso *ngFor="let perso of servantsInvoqued"
+            (click)="setBigCard(perso)"
+            [height]="'normal'"
+            [titles]="getTitles(user,perso)"
+            [level]="getLevel(perso)"
+            [showTitle]="true"
+            [grised]="haveServant(perso)"
+            [perso]="perso">
+        </app-cardperso>
+      </div>
+      <div class="invoqButtons">
+        <img [class.disabled]="user.quartz<3" class="clickable" (click)="summon(1)" src="./assets/images/summon12.png" />
+        <img [class.disabled]="user.quartz<30" class="clickable"  (click)="summon(10)" src="./assets/images/summon2.png" />
+      </div>
+    </div>
+    <!--<friends-->
+    <div *ngIf="page=='friends'" class="friends">
+      <div class="bloc conteneur noflex">
+        <div class="headers">
+          <p class="classement">Place</p>
+          <p>Score</p>
+          <p class="quartz">Quartz</p>
+          <p>Dernière Action</p>
+          <p class="joueur">Joueur</p>
+        </div>
+        <div class="friend" *ngFor="let friend of users;let i=index" class="clickable2" (click)="clickProfile(friend)">
+          <p class="place">{{(i+1)}}</p>
+          <div class="numberwithimage">
+            <img draggable="false" src="./assets/images/graal.png"/>
+            <p>{{friend.score}}</p>
+          </div>
+          <div class="numberwithimage">
+            <img draggable="false" src="./assets/images/quartz.png"/>
+            <p>{{friend.quartz}}</p>
+          </div>
+          <p class="date">{{friend.maj | date:'HH:mm:ss - dd/MM' }}</p>
+          <app-iconeperso class="icone"
+            [titles]="getTitles(friend,friend.servant)"
+            [showTitle]="true"
+            [image]="getImg(friend.id,friend.servant)"
+            [perso]="friend.servant">
+          </app-iconeperso>
+          <div class="noflex nomtitle">
+            <p>{{friend.nom}}</p>
+            <p>{{friend.title}}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--<SHOP-->
+    <div *ngIf="page=='shop'" class="shop">
+      <div class="bloc filters noflex">
+        <input type="text" [(ngModel)]="search" placeholder="Recherche vendeur.."/>
+        <button (click)="clickCreateSell()">{{createSell?'Cancel sell':'Create sell'}}</button>
+      </div>
+      <div class="ventes" *ngIf="createSell">
+        <div class="vente bloc noflex">
+          <div class="height93">
+            <div class="noflex propose">
+              <p>{{user.nom}} propose :</p>
+              <div class="numberwithimage">
+                <img draggable="false" src="./assets/images/quartz.png"/>
+                <input type="text" [(ngModel)]="createSell.propose_quartz" oninput="this.value = this.value.replace(/[^0-9]/g, '')">
               </div>
-              <div class="containerRightDuel">
-                <div style="display:flex">
-                  <p>{{perso.pdv}}/{{perso.pdvmax}}</p>
-                  <div class="containerbar" style="background:linear-gradient(#202020, #cc5050);">
-                    <div class="hp" [style.width]="getWidth(perso.pdv,perso.pdvmax)+'%'"></div>
-                  </div>
-                </div>
-                <div style="display:flex">
-                  <p>{{perso.npjauge}}/100</p>
-                  <div class="containerbar">
-                    <div class="np" [style.width]="getWidth(perso.npjauge,100)+'%'"></div>
-                  </div>
+              <div class="noflex">
+                <button [class.disabled]="createSell.propose_servants.length==5" (click)="clickChangePerso('propose_servant',-1,'shop')">Add servant</button>
+                <div>
+                  <app-cardperso *ngFor="let servant of createSell.propose_servants;let i=index" (click)="removeSell('propose_servant',i)"
+                    [height]="'tiny'"
+                    [grised]="haveServant(servant)"
+                    [showClasse]="false"
+                    [perso]="servant">
+                  </app-cardperso>
                 </div>
               </div>
-              <img style="filter: drop-shadow(2px 0px 4px black);width:55px;position: absolute;bottom:21px;right:-35px" src="./assets/images/classes/{{perso.classe}}.png"/>
+              <div class="noflex">
+                <button [class.disabled]="createSell.propose_titles.length==5" (click)="clickChangePerso('propose_title',-1,'shop')">Add title</button>
+                <div>
+                  <app-cardperso *ngFor="let servant of createSell.propose_titles;let i=index" (click)="removeSell('propose_title',i)"
+                    [height]="'tiny'"
+                    [titles]="'title'"
+                    [grised]="haveServant(servant)"
+                    [showClasse]="false"
+                    [showTitle]="true"
+                    [perso]="servant">
+                  </app-cardperso>
+                </div>
+              </div>
+              <div class="noflex">
+                <button [class.disabled]="createSell.propose_truetitles.length==5" (click)="clickChangePerso('propose_truetitle',-1,'shop')">Add true title</button>
+                <div>
+                  <app-cardperso *ngFor="let servant of createSell.propose_truetitles;let i=index" (click)="removeSell('propose_truetitle',i)"
+                    [height]="'tiny'"
+                    [titles]="'firstTitle'"
+                    [showClasse]="false"
+                    [grised]="haveServant(servant)"
+                    [showTitle]="true"
+                    [perso]="servant">
+                  </app-cardperso>
+                </div>
+              </div>
+            </div>
+            <div class="noflex price">
+              <p>Contre :</p>
+              <div class="numberwithimage">
+                <img draggable="false" src="./assets/images/quartz.png"/>
+                <input type="text" [(ngModel)]="createSell.price_quartz" oninput="this.value = this.value.replace(/[^0-9]/g, '')">
+              </div>
+              <div class="noflex">
+                <button [class.disabled]="createSell.price_servants.length==5" (click)="clickChangePerso('price_servant',-1,'shop')">Add servant</button>
+                <div>
+                  <app-cardperso *ngFor="let servant of createSell.price_servants;let i=index" (click)="removeSell('price_servant',i)"
+                    [height]="'tiny'"
+                    [grised]="haveServant(servant)"
+                    [showClasse]="false"
+                    [perso]="servant">
+                  </app-cardperso>
+                </div>
+              </div>
+              <div class="noflex">
+                <button [class.disabled]="createSell.price_titles.length==5" (click)="clickChangePerso('price_title',-1,'shop')">Add title</button>
+                <div>
+                  <app-cardperso *ngFor="let servant of createSell.price_titles;let i=index" (click)="removeSell('price_title',i)"
+                    [height]="'tiny'"
+                    [titles]="'title'"
+                    [showClasse]="false"
+                    [grised]="haveServant(servant)"
+                    [showTitle]="true"
+                    [perso]="servant">
+                  </app-cardperso>
+                </div>
+              </div>
+              <div class="noflex">
+                <button [class.disabled]="createSell.price_truetitles.length==5" (click)="clickChangePerso('price_truetitle',-1,'shop')">Add true title</button>
+                <div>
+                  <app-cardperso *ngFor="let servant of createSell.price_truetitles;let i=index" (click)="removeSell('price_truetitle',i)"
+                    [height]="'tiny'"
+                    [titles]="'firstTitle'"
+                    [showClasse]="false"
+                    [grised]="haveServant(servant)"
+                    [showTitle]="true"
+                    [perso]="servant">
+                  </app-cardperso>
+                </div>
+              </div>
             </div>
           </div>
+          <button [class.disabled]="cantsell(createSell)" (click)="createVente()">Create sell</button>
         </div>
-
-        <div class="containerbar" style="width:35%;height:40px;margin-top:20px;display:flex;background:linear-gradient(#202020, #cc5050);">
-          <p class="tothp">{{getTot(0)}}</p>
-          <div class="hp" [style.width]="getTotalHp()+'%'"></div>
-          <p class="tothp2">{{getTot(1)}}</p>
-        </div>
-
-        <div>
-          <p class="containerStatsDuel2" style="padding:0px">{{fightpvm?getPvmName():getFightName(adversaire)}}</p>
-          <div *ngFor="let perso of team2;let i=index" class="containerStatsDuel2" [style.opacity]="perso.pdv>0?1:0.7">
-            <div style="display:flex;justify-content: right;"><p>{{perso.nom}}</p><div style="display: flex;position: absolute;left: 10px;top: 2px;"><p *ngFor="let item of [].constructor(perso.level);">☆</p></div></div>
-            <div style="display: flex;">
-              <p style="bottom: 12px;position: absolute;font-size: 17px;width: 25px;text-align: center;color: white;text-shadow: 1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
-                background-color: darkred;border-radius: 20px;border: 2px ridge #202020;right: 80px;z-index: 2;">{{perso.niveau?perso.niveau:0}}</p>
-              <div class="containerRightDuel2">
-                <div style="display:flex">
-                  <div class="containerbar2" style="background:linear-gradient(#202020, #cc5050);">
-                    <div class="hp" [style.width]="getWidth(perso.pdv,perso.pdvmax)+'%'"></div>
-                  </div>
-                  <p>{{perso.pdv}}/{{perso.pdvmax}}</p>
-                </div>
-                <div style="display:flex">
-                  <div class="containerbar2">
-                    <div class="np" [style.width]="getWidth(perso.npjauge,100)+'%'"></div>
-                  </div>
-                  <p>{{perso.npjauge}}/100</p>
+      </div>
+      <div class="ventes" *ngIf="!createSell">
+        <div class="vente bloc noflex" *ngFor="let vente of getShops()">
+          <div class="height93">
+            <div class="noflex propose">
+              <p>{{getUserName(vente.user_id)}} propose :</p>
+              <div class="numberwithimage" *ngIf="vente.propose_quartz>0">
+                <img draggable="false" src="./assets/images/quartz.png"/>
+                <p>{{vente.propose_quartz}}</p>
+              </div>
+              <div *ngIf="vente.propose_servants.length>0" class="noflex">
+                <p>Servants :</p>
+                <div>
+                  <app-cardperso *ngFor="let servant of vente.propose_servants"
+                    (click)="setBigCard(servant)"
+                    [height]="'tiny'"
+                    [grised]="haveServant(servant)"
+                    [level]="getLevel(servant)"
+                    [showClasse]="false"
+                    [perso]="servant">
+                  </app-cardperso>
                 </div>
               </div>
-              <div [class.golden]="titlesduel2[i]==1" class="profilePicture2" style="margin:0;position: relative;left:0px;border: 4px ridge #404040;">
-                <img draggable="false" class="profilePicture" src="{{getImg(adversaire,perso)}}"/>
+              <div *ngIf="vente.propose_titles.length>0" class="noflex">
+                <p>Titles :</p>
+                <div>
+                  <app-cardperso *ngFor="let servant of vente.propose_titles"
+                  (click)="setBigCard(servant)"
+                    [height]="'tiny'"
+                    [titles]="'title'"
+                    [showClasse]="false"
+                    [grised]="haveServant(servant)"
+                    [showTitle]="true"
+                    [level]="getLevel(servant)"
+                    [perso]="servant">
+                  </app-cardperso>
+                </div>
               </div>
-              <img style="filter: drop-shadow(-2px 0px 4px black);width:55px;position: absolute;bottom:21px;left:-35px" src="./assets/images/classes/{{perso.classe}}.png"/>
+              <div *ngIf="vente.propose_truetitles.length>0" class="noflex">
+                <p>True titles :</p>
+                <div>
+                  <app-cardperso *ngFor="let servant of vente.propose_truetitles"
+                  (click)="setBigCard(servant)"
+                    [height]="'tiny'"
+                    [titles]="'firstTitle'"
+                    [grised]="haveServant(servant)"
+                    [showClasse]="false"
+                    [level]="getLevel(servant)"
+                    [showTitle]="true"
+                    [perso]="servant">
+                  </app-cardperso>
+                </div>
+              </div>
+            </div>
+            <div class="noflex price">
+              <p>Contre :</p>
+              <div class="numberwithimage" *ngIf="vente.price_quartz>0">
+                <img draggable="false" src="./assets/images/quartz.png"/>
+                <p>{{vente.price_quartz}}</p>
+              </div>
+              <div *ngIf="vente.price_servants.length>0" class="noflex">
+                <p>Servants :</p>
+                <div>
+                  <app-cardperso *ngFor="let servant of vente.price_servants"
+                  (click)="setBigCard(servant)"
+                    [height]="'tiny'"
+                    [showClasse]="false"
+                    [grised]="haveServant(servant)"
+                    [level]="getLevel(servant)"
+                    [perso]="servant">
+                  </app-cardperso>
+                </div>
+              </div>
+              <div *ngIf="vente.price_titles.length>0" class="noflex">
+                <p>Titles :</p>
+                <div>
+                  <app-cardperso *ngFor="let servant of vente.price_titles"
+                  (click)="setBigCard(servant)"
+                    [height]="'tiny'"
+                    [titles]="'title'"
+                    [grised]="haveServant(servant)"
+                    [showClasse]="false"
+                    [level]="getLevel(servant)"
+                    [showTitle]="true"
+                    [perso]="servant">
+                  </app-cardperso>
+                </div>
+              </div>
+              <div *ngIf="vente.price_truetitles.length>0" class="noflex">
+                <p>True titles :</p>
+                <div>
+                  <app-cardperso *ngFor="let servant of vente.price_truetitles"
+                  (click)="setBigCard(servant)"
+                    [height]="'tiny'"
+                    [titles]="'firstTitle'"
+                    [showClasse]="false"
+                    [grised]="haveServant(servant)"
+                    [level]="getLevel(servant)"
+                    [showTitle]="true"
+                    [perso]="servant">
+                  </app-cardperso>
+                </div>
+              </div>
             </div>
           </div>
-        </div>
-
-      </div>
-
-      <div style="position: relative;" *ngFor="let perso of team1;let i=index" [@idle]="getIdleState(i)" [@arriveleft]="arriveState[i]<0?'1':'0'">
-        <div  *ngIf="perso" class="persoduel" [style.scale]="perso.scale+i*0.1" [style.left]="xs1[i]+'px'" [style.top]="ys[i]-(perso.scale>1.8?100:0)+'px'" >
-          <div [style.filter]="perso.negative?'invert()':'unset'" [@animationcombat]="{value:perso.animation, params:{arrivex:perso.arrivex}}" style="position: relative;">
-            <img *ngIf="perso.fail" style="z-index:5;position: absolute;top:0px;width:50px;height:50px" src="./assets/images/fail.png"/>
-            <img draggable="false" class="shadow" src="./assets/images/shadow.png"/>
-            <img draggable="false" [attr.id]="'perso1-'+i" [class.titleDuel]="titlesduel[i]==1" [class.npUsed]="perso==personp"  src="{{getSprite(perso)}}" [style.transform]="perso.turn?'unset':'scaleX(-1)'"/>
-            <img class="opa0" [@slashOpacity]="perso.slash" src="./assets/images/atq/{{perso.atqanim}}.png" style="position:absolute;width:100%;height:100%;filter: drop-shadow(0px 0px 4px black)!important;" [style.left]="perso.atqanimdecal+'px'"/>
-          </div>
-        </div>
-      </div>
-
-      <div style="position: relative;" *ngFor="let perso of team2;let i=index" [@idle]="getIdleState2(i)" [@arriveright]="arriveState2[i]<0?'1':'0'">
-        <div *ngIf="perso" class="persoduel" [style.scale]="perso.scale+i*0.1" [style.left]="xs2[i]+'px'" [style.top]="ys[i]-(perso.scale>1.8?100:0)+'px'" >
-          <div [style.filter]="perso.negative?'invert()':''" [@animationcombat]="{value:perso.animation, params:{arrivex:perso.arrivex}}" style="position: relative;">
-            <img *ngIf="perso.fail" style="z-index:5;position: absolute;top:0px;width:50px;height:50px" src="./assets/images/fail.png"/>
-            <img draggable="false" class="shadow" src="./assets/images/shadow.png"/>
-            <img  draggable="false" [attr.id]="'perso2-'+i" [class.titleDuel]="titlesduel2[i]==1" [class.npUsed]="perso==personp" src="{{getSprite(perso)}}"  [style.transform]="!perso.turn?'unset':'scaleX(-1)'"/>
-            <img class="opa0" [@slashOpacity]="perso.slash" src="./assets/images/atq/{{perso.atqanim}}.png" style="position:absolute;width:100%;height:100%;transform: scaleX(-1);filter: drop-shadow(0px 0px 4px black)!important;" [style.right]="perso.atqanimdecal+'px'"/>
-          </div>
+          <button [class.disabled]="user.id==vente.user_id?false:cantbuy(vente)" (click)="user.id==vente.user_id?cancelsell(vente):buysell(vente)">{{user.id==vente.user_id?'Cancel':'Buy'}}</button>
         </div>
       </div>
     </div>
-
-    <!-- <CONNECTION -->
-    
-    <div *ngIf="state=='connection'">
-      <img draggable="false" src="./assets/images/connScreen.png" style="width:100%"/>
-      <div class="connform" style="position: absolute;left:33%;top:23%">
-        <div>
-          <p>Pseudo :</p>
-          <div>
-            <input type="text" [(ngModel)]="pseudo"/>
+    <!--<PROFILE-->
+    <div *ngIf="page=='profile'" class="profile">
+      <div class="bloc">
+        <div class="noflex">
+          <div class="topinfos">
+            <app-iconeperso class="icone clickable" [class.cantClick]="user.id!=userProfile.id"
+              (click)="clickChangePerso('bigserv',-1,'profile')"
+              [titles]="getTitles(userProfile,userProfile.servant)"
+              [image]="getImg(userProfile.id,userProfile.servant)"
+              [perso]="userProfile.servant">
+            </app-iconeperso>
+            <div class="noflex nomtitle">
+              <p>{{userProfile.nom}}</p>
+              <p>{{userProfile.title}}</p>
+            </div>
           </div>
-          <p>Mot de passe :</p>
-          <div>
-            <input type="password" [(ngModel)]="mdp"/>
-          </div>
-          <p style="color:red;height:25px;position:absolute;bottom:15px;">{{message}}</p>
-          <div style="display:flex;justify-content: space-around;width:350px;margin:auto;">
-            <button [class.disabledButton]="pseudo.length<3||mdp.length<3||mdp.length>20||pseudo.length>20" (click)="connect(false)">Connexion</button>
-            <button [class.disabledButton]="pseudo.length<3||mdp.length<3||mdp.length>20||pseudo.length>20" (click)="createAcc()">Créer compte</button>
-          </div>
+          <img [class.cantClick]="user.id!=userProfile.id" (click)="clickChangePerso('bigserv',-1,'profile')" [ngClass]="userHasTitle(userProfile,userProfile.servant)" class="bigserv clickable" src="{{getImg(userProfile.id,userProfile.servant)}}" />
         </div>
-      </div>
-    </div>
-
-    <!-- <BIG CARD -->
-
-    <div *ngIf="selectedServ!=undefined" class="bigCard" [class.alreadyPulled]="isNoData()&&alreadyPulled()">
-      <div *ngIf="enhance" class="enhance">
-        <div style="display:flex">
-          <div  *ngFor="let ce of getCE();let i=index" [class.disabled]="ce.qte==0||(ce.qte==1&&ce.nom!='Craft Essence')||isLevelCap()">
-            <img class="clickable" (click)="addCe(i,1,ce.qte)" src="{{ce.img1}}" style="width:120px;height:200px;"/>
-            <p [class.red]="getCeValue(i)>0" style="text-shadow: unset;text-align: center;color:white">{{ce.qte-getCeValue(i)}}</p>
-            <p class="red clickable" (click)="addCe(i,-1,ce.qte)" style="position:relative;left:13px;width:80%;text-shadow: unset;text-align: center;color:white;background-color: rgba(20,20,20,0.9);border: 3px ridge #bbb;border-radius: 20px;">{{ getCeValue(i) }}</p>
-          </div>
-        </div>
-        <div style="display: flex;justify-content: center;margin-top:20px;"><p style="text-shadow: unset;text-align: center;color:white;">Level : {{getLevel()}}</p><p style="text-shadow: unset;text-align: center;color:green;margin-left:10px;">( +{{getMore()}} )</p></div> 
-        <div *ngIf="isLevelCap()" style="display: flex;justify-content: center;margin-top:20px;"><p style="text-shadow: unset;text-align: center;color:white;">Vous devez sacrifier une autre carte {{selectedServ.nom}} pour utiliser l'ascension</p></div> 
-        <div style="display:flex;justify-content: center;">
-          <button [class.disabledButton]="!hasDoublon()||!isLevelCap()" (click)="ascension()">Ascension</button>
-          <button [class.disabledButton]="getMore()==0" (click)="addLevel()" style="margin-left:20px;">Valider</button>
-        </div>
-      </div>
-      <div *ngIf="ascs.length>0" class="enhance">
-        <div style="display:flex">
-          <div *ngFor="let asc of ascs;let i=index">
-            <img *ngIf="!disabledAsc(i)" class="clickable" (click)="changeAscension(i)" src="{{asc}}" style="width:275px;height:400px;"/>
-          </div>
-        </div>
-      </div>
-      <div class="clickable" (click)="selectedServ=undefined" [class.grised]="isNoData()" style="height:500px;">
-        <img [class.golden2]="golden(selectedServ.id)" draggable="false" style="width:320px;height:100%;border:3px ridge #202020;box-shadow: black -9px 8px 15px;" src="{{getImg(id,selectedServ)}}"/>
-        <img draggable="false" style="width:320px;height:100%;position:absolute;top:3px;left:3px" src="./assets/images/borders/{{selectedServ.level}}.png"/>
-        <p style="white-space: break-spaces;line-height: 22px;bottom: 28px;position: absolute;font-size: 30px;text-align: center;color:white;text-shadow: 1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;width:100%">{{selectedServ.nom}}</p>
-      </div>
-      <div class="useTitle">
-        <p *ngIf="first(selectedServ)&&state=='formation'" class="clickable" (click)="setTitle()">Use as Title</p>
-        <p *ngIf="!isNoData()&&state=='formation'&&lessThan100()&&selectedServ.nom!='Craft Essence'" class="clickable" (click)="clickEnhance()">Enhance Servant</p>
-        <p *ngIf="!isNoData()&&state=='formation'&&moreThan30()&&selectedServ.nom!='Craft Essence'" class="clickable" (click)="changeAsc()">Change Ascension</p>
-      </div>
-    </div>
-
-    <!-- <FORMATION -->
-
-    <div *ngIf="state=='formation'" class="recap" style="position: absolute;top:120px;width:100%" >
-      <p class="nbServ">{{getData().length}}</p>
-      <input type="text" placeholder="Recherche.." [(ngModel)]="recherche" style="left: 43%;position: relative;width:200px;"/>
-      <button style="position: absolute;left: 65%;top: -10px;width: 200px;" (click)="getUserData(false);getTitles();getLevels()">Refresh</button>
-      <div class="options">
-        <p [class.red]="includesFilter('Alter Ego')" (click)="filter('Alter Ego')">Alter Ego</p>
-        <p [class.red]="includesFilter('Archer')" (click)="filter('Archer')">Archer</p>
-        <p [class.red]="includesFilter('Assassin')" (click)="filter('Assassin')">Assassin</p>
-        <p [class.red]="includesFilter('Avenger')" (click)="filter('Avenger')">Avenger</p>
-        <p [class.red]="includesFilter('Beast')" (click)="filter('Beast')">Beast</p>
-        <p [class.red]="includesFilter('Berserker')" (click)="filter('Berserker')">Berserker</p>
-        <p [class.red]="includesFilter('Caster')" (click)="filter('Caster')">Caster</p>
-        <p [class.red]="includesFilter('Foreigner')" (click)="filter('Foreigner')">Foreigner</p>
-        <p [class.red]="includesFilter('Lancer')" (click)="filter('Lancer')">Lancer</p>
-        <p [class.red]="includesFilter('Moon Cancer')" (click)="filter('Moon Cancer')">Moon Cancer</p>
-        <p [class.red]="includesFilter('Pretender')" (click)="filter('Pretender')">Pretender</p>
-        <p [class.red]="includesFilter('Rider')" (click)="filter('Rider')">Rider</p>
-        <p [class.red]="includesFilter('Ruler')" (click)="filter('Ruler')">Ruler</p>
-        <p [class.red]="includesFilter('Saber')" (click)="filter('Saber')">Saber</p>
-        <p [class.red]="includesFilter('Shielder')" (click)="filter('Shielder')">Shielder</p>
-        <p [class.red]="filterSpec!='Servants 5*'"  (click)="filterSpec=='Servants 5*'?filterSpec='':filterSpec='Servants 5*'" style="margin-top:30px">Servants 5*</p>
-        <p [class.red]="filterSpec!='Servants 4*'"  (click)="filterSpec=='Servants 4*'?filterSpec='':filterSpec='Servants 4*'">Servants 4*</p>
-        <p [class.red]="filterSpec!='Titles'"       (click)="filterSpec=='Titles'?filterSpec='':filterSpec='Titles'">Titles</p>
-        <p [class.red]="filterSpec!='Doublons'"     (click)="filterSpec=='Doublons'?filterSpec='':filterSpec='Doublons'">Doublons</p>
-        <p [class.red]="filterSpec!='Originaux'"    (click)="filterSpec=='Originaux'?filterSpec='':filterSpec='Originaux'">Originaux</p>
-        <p [class.red]="!showEssences" (click)="showEssences=!showEssences"  style="margin-top:30px">Craft Essence</p>
-        <p [class.red]="!notPulled" (click)="notPulled=!notPulled">Not Pulled</p>
-      </div>
-
-      <div class="tab2">
-        <div class="tab" *ngIf="!notPulled">
-          <div *ngFor="let perso of getData();let i=index" style="position:relative;margin-right:10px;" class="clickable" (click)="selectServant?changeProfile(perso.id):clickServant(perso)">
-            <img [class.golden]="golden(perso.id)" draggable="false" style="width:130px;border:3px ridge #202020;box-shadow: black -9px 8px 15px;" src="{{getImg(id,perso)}}" />
-            <img draggable="false" style="width:130px;position:absolute;top:3px;left:3px" src="./assets/images/borders/{{perso.level}}.png"/>
-            <img style="filter: drop-shadow(0px 0px 3px black);width: 40px;position: absolute;z-index: 2;height: 40px;bottom: 55px;right: -20px;" src="./assets/images/classes/{{perso.classe}}.png"/>
-            <p *ngIf="getServLevel2(perso)>0" style="bottom: 30px;position: absolute;font-size: 17px;width: 25px;text-align: center;color: white;text-shadow: 1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
-              background-color: green;border-radius: 20px;border: 2px ridge #202020;right: -12px;z-index: 2;">{{getServLevel2(perso)}}</p>
-            <p style="bottom: 0px;position: absolute;font-size: 17px;width: 25px;text-align: center;color: white;text-shadow: 1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
-              background-color: #aa2002;border-radius: 20px;border: 2px ridge #202020;right: -12px;z-index: 2;">{{perso.qte}}</p>
-            <p style="height:0px;white-space: break-spaces;line-height: 10px;width:130px;top: -33px;position: relative;font-size: 15px;text-align: center;color:white;text-shadow: 1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;">{{perso.nom}}</p>
+        <div class="noflex rightprofile">
+          <div class="topright">
+            <div class="noflex">
+              <p>Stats :</p>
+              <button (click)="createPopup('histopulls',undefined)">Historique Pulls</button>
+              <p>Combat :</p>
+              <!--<button>Historique</button>
+              <button>Passifs</button>
+              <button>Avantages</button>-->
+            </div>
+            <div class="noflex droite">
+              <p>({{userProfile.compo.length}}/5) Compo :</p>
+              <div class="compo">
+                <div [class.cantClick]="user.id!=userProfile.id" *ngFor="let item of [].constructor(5);let i=index" class="composerv clickable" (click)="clickChangePerso('compo',i,'profile')">
+                  <app-cardperso *ngIf="userProfile.compo[i]"
+                    [height]="'normal'"
+                    [titles]="getTitles(userProfile,userProfile.compo[i])"
+                    [level]="getLevel(userProfile.compo[i])"
+                    [showTitle]="true"
+                    [showLevel]="true"
+                    [showQte]="true"
+                    [image]="getImg(userProfile.id,userProfile.compo[i])"
+                    [perso]="userProfile.compo[i]">
+                  </app-cardperso>
+                  <div class="noservassigned" *ngIf="!userProfile.compo[i]&&user.id==userProfile.id"></div>
+                </div>
+              </div>
+            </div>
             
           </div>
-        </div>
-        
-        <div class="tab" *ngIf="!selectServant">
-          <div *ngFor="let perso of getNoData();let i=index" style="height:fit-content;position:relative;margin-right:10px;filter: grayscale(200%);opacity: 0.6;" class="clickable2" (click)="clickServant(perso)">
-            <img draggable="false" style="width:130px;border:3px ridge #202020;box-shadow: black -9px 8px 15px;" src="{{perso.img1}}"/>
-            <img draggable="false" style="width:130px;position:absolute;top:3px;left:3px;" src="./assets/images/borders/{{perso.level}}.png"/>
-            <p style="height:0px;width:130px;top: -33px;position: relative;font-size: 15px;text-align: center;color:white;text-shadow: 1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
-            white-space: break-spaces;line-height: 10px;">{{perso.nom}}</p>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- <AFFINITY -->
-
-    <div class="fightInfos clickable3" (click)="showinfo=false;" *ngIf="showinfo">
-      <p style="font-size: 50px;">Class Affinity</p>
-      <div *ngFor="let row of fightInfos" class="rowInfos">
-        <div class="blocInfos" *ngFor="let classe of row.row" [style.background-color]="classe.done?'rgb(20, 20, 20)':'rgb(20, 0, 0)'">
-          <p style="text-decoration: underline;font-size: 30px;position: relative;left: 20px;">{{classe.class}}</p>
-          <p style="position: absolute;bottom: 30px;height: 40%;">{{classe.desc}}</p>
-          <img src="./assets/images/classes/{{classe.class}}.png" style="position: absolute;width: 70px;top: 8px;left: 8px;"/>
-        </div>
-      </div>
-    </div>
-    
-    <!-- <AVANTAGES -->
-
-    <div class="fightInfos clickable3" (click)="showinfo2=false;" *ngIf="showinfo2" style="width:unset;left:24%">
-      <img src="./assets/images/avantages.png"/>
-    </div>
-
-    <!-- <PROFILE -->
-
-    <div *ngIf="profile" class="profile">
-      <div class="histoPulls clickable3" (click)="historiquePulls=false;" *ngIf="historiquePulls">
-        <div *ngFor="let pull of histpull" class="pullbloc">
-          <p>{{pull.date | date:'HH:mm:ss - dd/MM/yyyy' }}</p>
-          <div style="display:flex">
-            <img [class.notcool]="!img.cool&&!img.gigacool" [class.gigacool]="img.gigacool" style="height:100px;width:70px;border:3px solid black" *ngFor="let img of pull.pulls" src="{{img.img}}"/>
-          </div>
-        </div>
-      </div>
-
-      <div class="histoPulls" *ngIf="historiquePvp">
-        <div style="display:flex;justify-content: space-around;">
-          <p [class.red]="typeHistoPvp=='Combats lancés'" (click)="typeHistoPvp='Combats lancés'" class="clickable">Combats lancés</p>
-          <p [class.red]="typeHistoPvp=='Combats subis'" (click)="typeHistoPvp='Combats subis'" class="clickable">Combats subis</p>
-        </div>
-        <div class="clickable3" (click)="historiquePvp=false;" >
-          <div *ngFor="let pvp of getPvpHisto()">
-            <div style="display:flex;justify-content: space-between;border: 3px solid black;" 
-            [style.background-color]="(pvp.win==1&&pvp.user_id==profile&&typeHistoPvp=='Combats lancés')||(pvp.win==0&&pvp.user_id2==profile&&typeHistoPvp=='Combats subis')?'rgba(0,30,0,0.5)':'rgba(30,0,0,0.5)'">
-              <p>{{getUserName(pvp.user_id)}}</p>
-              <p style="position: absolute;text-align: center;width: 94%;">{{pvp.date | date:'HH:mm:ss - dd/MM/yyyy' }}</p>
-              <p>{{getUserName(pvp.user_id2)}}</p>
-            </div>
-            <div style="display:flex">
-              <div *ngFor="let perso of pvp.team1">
-                <img [class.notcool]="perso.pdv==0" style="height:100px;width:70px;" src="{{getImg2(perso)}}"/>
-              </div>
-              <p style="margin: 5px;top: 30px;position: relative;">VS</p>
-              <div *ngFor="let perso of pvp.team2">
-                <img [class.notcool]="perso.pdv==0" style="height:100px;width:70px;" src="{{getImg2(perso)}}"/>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <img (click)="profile==id?clickServantProfile(-1):null" [class.golden]="first(myprofile.servant)" *ngIf="myprofile.servant" class="servProfile" [class.clickable]="profile==id" draggable="false" src="{{getImg(myprofile.user_id,myprofile.servant)}}"/>
-      <div (click)="profile==id?clickServantProfile(-1):null" class="servProfile" [class.clickable]="profile==id" *ngIf="!myprofile.servant"></div>
-      <div class="profileBotServs">
-        <img [class.clickable]="profile==id" (click)="profile==id?clickServantProfile(i):null" [class.golden]="myprofile.titleservs[i]==1" *ngFor="let serv of myprofile.servs;let i=index" draggable="false" src="{{getImg(myprofile.user_id,serv)}}"/>
-        <div [class.clickable]="profile==id" (click)="profile==id?clickServantProfile(i):null" *ngFor="let item of [].constructor(10-myprofile.servs.length);let i=index"></div>
-      </div>
-      <div style="display:flex;">
-        <div style="height:fit-content;position: absolute;left:525px;max-width:500px;width:500px;">
-          <div style="display:flex">
-            <div *ngIf="myprofile.servant" [class.golden]="isGold(profile)" style="margin-right: 20px;margin-bottom: 20px;" class="profilePicture">
-              <img draggable="false" src="{{getImg(myprofile.user_id,myprofile.servant)}}"  />
-            </div>
-            <div *ngIf="!myprofile.servant" class="profilePicture"  style="margin-right: 20px;margin-bottom: 20px;"></div>
-            <div>
-              <p style="font-size: 30px;">{{myprofiledata.nom}}</p>
-              <p>{{myprofiledata.title}}</p>
-            </div>
-          </div>
-          <p style="font-size: 15px;">Last pull : {{myprofiledata.last}}</p>
-          <p style="font-size: 15px;">Connecté depuis : {{myprofiledata.conn}}</p>
-          <div class="desc" *ngIf="profile!=id">
-            <p *ngIf="myprofile.description" style="font-size: 15px;">{{myprofile.description}}</p>
-          </div>
-          <input type="text" class="desc" *ngIf="profile==id" [(ngModel)]="profiledesc" style="width:450px"/>
-          <div style="display:flex;justify-content:space-around">
-            <button [class.disabledButton]="user.smurf==0" style="width:140px" *ngIf="profile==id" (click)="transfert()">{{confirmTransfert}}</button>
-            <button (click)="historiquePulls=true;">Historique Pulls</button>
-            <button [class.disabledButton]="myprofile.description==profiledesc||profiledesc.length>99" style="width:140px" *ngIf="profile==id" (click)="descProfile()">Valider</button>
-          </div>
-        </div>
-
-        <div class="desc2" style="right: 420px;position: absolute;width: 620px;">
-          <div style="display:flex;justify-content: space-between;">
-            <p>Composition :</p>
-            <div style="display:flex;">
-              <button (click)="showinfo=true" style="margin:0;">Passifs</button>  
-              <button (click)="showinfo2=true" style="margin:0;">Avantages</button> 
-            </div>
-          </div>
-          <div class="profileBotServs2">
-            <div style="bottom:20px;position:absolute;display:flex;justify-content: space-between;width:100%">
-              <div style="z-index: 2;padding-left:20px;left:-21px;border-color: rgb(0,80,0);" class="boosts">
-                <img matTooltip="{{boost.desc}}" class="clickable3 bonusme" style="pointer-events:unset;width:40px;height:40px;" *ngFor="let boost of getBonuses(0)" src="./assets/images/classes/{{boost.classe}}.png"/>
-                <p style="position: relative;top:6px" *ngIf="getBonuses(0).length==0">No bonus</p>
-              </div>
-              <div *ngIf="profile!=id" style="z-index: 2;padding-right:20px;right:-17px;border-color: rgb(80,0,0);" class="boosts bonushe">
-                <img matTooltip="{{boost.desc}}" class="clickable3" style="width:40px;height:40px;" *ngFor="let boost of getBonuses(1)" src="./assets/images/classes/{{boost.classe}}.png"/>
-                <p style="position: relative;top:6px" *ngIf="getBonuses(1).length==0">No bonus</p>
-              </div>
-            </div>
-            <div *ngFor="let serv of myprofile.comp;let i=index"  style="position:relative">
-              <p *ngIf="profile==id" style="bottom: -13px;position: absolute;font-size: 17px;width: 25px;text-align: center;color: white;text-shadow: 1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
-              background-color: green;border-radius: 20px;border: 2px ridge #202020;right: 15px;z-index: 2;">{{getServLevel2(serv)}}</p>
-              <img style="filter: drop-shadow(0px 0px 3px black);width: 60px;position: absolute;z-index: 2;height: 60px;bottom: -30px;left:50px;" src="./assets/images/classes/{{serv.classe}}.png"/>
-              <img [class.clickable]="profile==id" (click)="profile==id?clickServantProfileCompo(i):null" [class.golden]="id==profile&&myprofile.titlescompo[i]==1" draggable="false" src="{{getImg(myprofile.user_id,serv)}}"/>
-            </div>
-            <div class="emptyserv" [class.clickable]="profile==id" (click)="profile==id?clickServantProfileCompo(i):null" *ngFor="let item of [].constructor(4-myprofile.compo.length);let i=index"></div>
-          </div>
-          <div style="position: absolute;bottom: 20px;display:flex;justify-content: space-evenly;width: 94%;">
-            <button (click)="getPvp();getHistoPulls();">Refresh</button>
-            <button [class.disabledButton]="myprofile.compo.length<4" *ngIf="profile!=id" (click)="adversaire=profile;launchDuel()">Duel</button>  
-            <button (click)="historiquePvp=true">Historique</button>  
-          </div>
-        </div>
-
-        <div *ngIf="myprofilestats" class="desc2" style="width:330px">
-          <div style="display:flex;justify-content: space-between;"><p>Titles :</p><p> {{myprofilestats.titles}}</p></div>
-          <div style="display:flex;justify-content: space-between;"><p>Total servants :</p><p> {{myprofilestats.totservs}}</p></div>
-          <div style="display:flex;justify-content: space-between;"><p>Servants 5* :</p><p> {{myprofilestats.servant5}}</p></div>
-          <div style="display:flex;justify-content: space-between;"><p>Servants 4* :</p><p> {{myprofilestats.servant4}}</p></div>
-          <div style="display:flex;justify-content: space-between;"><p>Pulls :</p><p> {{myprofilestats.pulls}}</p></div>
-          <div style="display:flex;justify-content: space-between;"><p>Max banner pull :</p><p> {{myprofilestats.maxpull}}</p></div>
-          <div style="display:flex;justify-content: space-between;"><p>Succès :</p><p> {{myprofilestats.success}}</p></div>
-          <div style="display:flex;justify-content: space-between;"><p>Nombre d'achats :</p><p> {{myprofilestats.nbAchats}}</p></div>
-          <div style="display:flex;justify-content: space-between;"><p>Nombre de ventes :</p><p> {{myprofilestats.nbVentes}}</p></div>
-          <div style="display:flex;justify-content: space-between;"><p>Matchs lancés :</p><p> {{myprofilestats.pvplances}}</p></div>
-          <div style="display:flex;justify-content: space-between;"><p>Matchs lancés win :</p><p> {{myprofilestats.pvpgagnes}}</p></div>
-          <div style="display:flex;justify-content: space-between;"><p>Matchs subis :</p><p> {{myprofilestats.pvppris}}</p></div>
-          <div style="display:flex;justify-content: space-between;"><p>Matchs subis lose :</p><p> {{myprofilestats.pvpperdus}}</p></div>
-        </div>
-      </div>
-    </div>
-
-    <!-- <FRIENDS -->
-
-    <div *ngIf="state=='friends'">
-      <button (click)="getUsers();getProfiles();getPvp();getHistoPulls();gethistoPvp()" style="position: absolute;top: 110px;left: 43%;width: 200px;">Refresh</button>
-      <p [class.red]="triInvoc" class="clickable" (click)="triInvoc==true?triInvoc=false:triInvoc=true" style="position:absolute;left: 715px;top: 165px;z-index: 5;color: white;text-shadow: 4px 0 black, 0 1px black, 1px 0 black, 0 -1px black;">Wins</p>
-      <p [class.red]="triInvoc" class="clickable" (click)="triInvoc==true?triInvoc=false:triInvoc=true" style="position:absolute;left: 1020px;top: 165px;z-index: 5;color: white;text-shadow: 4px 0 black, 0 1px black, 1px 0 black, 0 -1px black;">Dernière Invocation</p>
-      <p style="position:absolute;left: 1280px;top: 165px;z-index: 5;color: white;text-shadow: 4px 0 black, 0 1px black, 1px 0 black, 0 -1px black;">Connecté Depuis</p>
-      <div class="containerScore" style="left:200px;width:1300px">
-        <div style="width:100%">
-          <div *ngFor="let user of getFriends();let i=index"  class="clickable clickable3" (click)="setProfile(user.id)">
-            <div style="display:flex;">
-              <p style="color: white;font-size: 50px;position: absolute;left:10px;text-shadow: 4px 0 black, 0 1px black, 1px 0 black, 0 -1px black;">{{(i+1)}}</p>
-              <div class="score" style="left:85px;margin-top:10px;" [style.border-color]="user.id==id?'#bb9930':'#bbb'">
-                <p class="sc" style="top:-3px">{{user.score}}</p><img draggable="false" src="./assets/images/graal.png"/>
-              </div>
-              <div class="score" style="left:105px;margin-top:10px;" [style.border-color]="user.id==id?'#bb9930':'#bbb'">
-                <p class="sc" style="top:-3px">{{user.quartz}}</p><img draggable="false" src="./assets/images/quartz.png"/>
-              </div>
-              <p style="position:absolute;left: 543px;margin-top: 18px;color:green;text-shadow:unset">{{getWins(user.id)}}</p>
-              <div [style.background-color]="getWinColor(user.id)" style="position: absolute;left: 515px;width: 20px;height: 20px;border: 4px solid black;margin-top: 18px;"></div>
-              <div *ngIf="getProfile(user.id).servant" class="profilePicture2" [class.golden]="isGold(user.id)">
-                <img  draggable="false" src="{{getImg(user.id,getProfile(user.id).servant)}}"/>
-              </div>
-              <div style="position: absolute;left: 645px;padding-top: 4px;text-align: left;width:400px">
-                <p style="text-shadow: 4px 0 black, 0 1px black, 1px 0 black, 0 -1px black;" [style.color]="user.id==id?'#bb9930':'white'">{{user.nom}}</p>
-                <p style="position:absolute;font-size:14px;text-shadow: 4px 0 black, 0 1px black, 1px 0 black, 0 -1px black;" [style.color]="user.id==id?'#bb9930':'white'">{{user.title}}</p>  
-              </div>
-              <div style="position: absolute;left: 870px;padding-top: 15px;text-align: left;width:280px;opacity: 0.4;">
-                <p style="position:absolute;font-size:14px;text-shadow: 4px 0 black, 0 1px black, 1px 0 black, 0 -1px black;" [style.color]="user.id==id?'#bb9930':'white'">{{user.last}}</p>  
-              </div>
-              <div style="position: absolute;left: 1095px;padding-top: 15px;text-align: left;width:280px;opacity: 0.4;">
-                <p style="position:absolute;font-size:14px;text-shadow: 4px 0 black, 0 1px black, 1px 0 black, 0 -1px black;" [style.color]="user.id==id?'#bb9930':'white'">{{user.conn}}</p>  
-              </div>
+          <div class="botservs">
+            <div [class.cantClick]="user.id!=userProfile.id" *ngFor="let item of [].constructor(10);let i=index" class="botserv clickable" (click)="clickChangePerso('botserv',i,'profile')">
+              <img *ngIf="userProfile.servants[i]" [ngClass]="userHasTitle(userProfile,userProfile.servants[i])" src="{{getImg(userProfile.id,userProfile.servants[i])}}" />
+              <div class="noservassigned" *ngIf="!userProfile.servants[i]&&user.id==userProfile.id"></div>
             </div>
           </div>
         </div>
       </div>
     </div>
+  </div>
+  <!--<footer-->
+  <div class="footer">
+    <!--<img draggable="false" (click)="clickMenu('pvm')" src="./assets/images/pvmButton.png"/>-->
+    <img draggable="false" (click)="clickMenu('formation')" src="./assets/images/formationButton.png"/>
+    <img draggable="false" (click)="clickMenu('banner')" src="./assets/images/summonButton.png"/>
+    <img draggable="false" (click)="clickMenu('friends')" src="./assets/images/friendsButton.png"/>
+    <img draggable="false" (click)="clickMenu('shop')" src="./assets/images/shopButton.png"/>
+    <img draggable="false" (click)="clickProfile(user)" src="./assets/images/profileButton.png"/>
+  </div>
 
-    <!-- <HEADER -->
-    
-    <div *ngIf="state!='connection'&&state!='duel'">
-      <div class="header" style="box-shadow: white 1px 1px 10px;width: 99%;height: 90px;background-color: rgba(100,150,200,0.8);border: 3px ridge #555;display:flex;justify-content: space-around;margin-bottom:20px;">
-          <img class="clickable" (click)="succesOpen=!succesOpen" draggable="false" src="./assets/images/succes.png" style="position: absolute;left: 15px;width: 80px;"/>
-          <img class="clickable" (click)="recordOpen=!recordOpen" draggable="false" src="./assets/images/record.png" style="position: absolute;right: 20px;width: 80px;top:8px"/>
-          <p *ngIf="successToClaim.length>0" style="top: 55px;position: absolute;font-size: 20px;width: 29px;text-align: center;color: white;text-shadow: 1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
-          background-color: #aa2002;border-radius: 20px;border: 2px ridge #202020;left: 70px;z-index: 2;">{{successToClaim.length}}</p>
-
-          <div class="succes" *ngIf="succesOpen" style="overflow-y:scroll">
-            <p>Succès</p>
-            <div class="descSucces" *ngFor="let success of successToClaim" style="padding:10px;margin: auto;width: 75%;height: 70px;position: relative;margin-bottom:10px">
-              <p style="text-decoration: underline;font-size: 15px;">{{success.nom}}</p>
-              <p style="height:55%;text-align: left;">{{success.desc}}</p>
-              <div class="nostyle" style="left: 10px;bottom: 4px;height: 20px;">
-                <p class="clickable" style="text-shadow: 1px 0 green, 0 1px green, 1px 0 green, 0 -1px green;
-                font-size: 18px;" (click)="claimSuccess(success)">Claim</p>
-              </div>
-              <div class="nostyle">
-                <p style="font-size:20px;text-align: right;top:4px;right:30px;">{{success.recompense}}</p>
-                <img style="width:30px;height:30px;top:3px;left:25px;" draggable="false" src="./assets/images/quartz.png"/>
-              </div>
-            </div>
-            <button (click)="checkSuccess()">Refresh</button>
-          </div>
-
-        
-        <div class="clickable" (click)="calc()"><p>{{score}}</p><img draggable="false" src="./assets/images/graal.png"/></div>
-        <p style="color: white;text-shadow: 4px 0 black, 0 1px black, 1px 0 black, 0 -1px black;padding-top: 20px;font-size: 35px;position: absolute;">{{pseudo}}</p>
-        <p style="color: black;text-shadow: 4px 0 white, 0 1px white, 1px 0 white, 0 -1px white;padding-top: 55px;font-size: 20px;position: absolute;">{{user.title}}</p>
-        <div class="clickable" (click)="refreshUser()"><p>{{quartz}}</p><img draggable="false" src="./assets/images/quartz.png"/></div>
-        <p style="position: absolute;top: 68px;left: 70%;color: white;text-shadow: 4px 0 black, 0 1px black, 1px 0 black, 0 -1px black;">Next Quartz : {{nextSQ < 10?'0':''}}{{nextSQ}}:{{nextSQs < 10?'0':''}}{{nextSQs}}</p>
-      </div>
-  
-      <img draggable="false" src="./assets/images/bgrecap.png" [style.display]="state=='recap'||state=='formation'||state=='friends'||state=='shop'?'unset':'none'" style="position: absolute;z-index: -1;width: 100%;top: 100px;height:88%"/>
-      <img *ngIf="state=='pvm'" draggable="false" src="./assets/images/pvm/{{getPvmBg()}}.png" style="position: absolute;z-index: -1;width: 100%;top: 100px;min-height:72%;max-height:100%"/>
-  
-      <!-- <RECAP -->
-
-      <div class="recap" *ngIf="state=='recap'" style="display:flex;justify-content: center;top: 270px;position: absolute;width: 100%;">
-        <img draggable="false" style="width:130px" *ngFor="let perso of persosInvoqued" src="{{perso.img1}}"/>
-        <div style="position: absolute;">
-          <img draggable="false" style="width:130px" *ngFor="let perso of persosInvoqued" src="./assets/images/borders/{{perso.level}}.png"/>
-        </div>
-      </div>
-
-      <!-- <VENTE -->
-      
-      <div *ngIf="state=='shop'">
-        <div *ngIf="createVente" class="creatVente">
-          <p style="text-align: center;">{{sellType=='quartz'&&persoToSell?'-':'Selectionnez le Servant que vous souhaitez '+(!persoToSell?'échanger':'vendre')}}</p>
-          <p style="position: absolute;top: 0px;right: 200px;color: white;text-shadow: unset;" [class.red]="filterSpec!='Doublons'" (click)="filterSpec=='Doublons'?filterSpec='':filterSpec='Doublons'" class="clickable">Doublons</p>
-          <input type="text" placeholder="Recherche.." [(ngModel)]="recherche" style="left: 3%;position: relative;width:200px;top:-30px;margin-bottom:0px"/>
-          <div style="display:flex;justify-content: center;height:270px;">
-            <div style="display:flex;overflow-x:scroll;overflow-y:hidden;padding:20px;" [style.display]="sellType=='quartz'&&persoToSell?'none':'flex'">
-              <div [class.disabled]="cantSellServant(servant.id)" *ngFor="let servant of getSellServant()" style="height:207px;position:relative;height:213px"  class="clickable" (click)="clickSellPerso(servant)">
-                <img [class.golden]="persoToSell==undefined?golden(servant.id):false" draggable="false" style="height:207px;width:130px;border:3px ridge #202020;box-shadow: black -9px 8px 15px;" src="{{getImg(this.id,servant)}}"/>
-                <img draggable="false" style="height:207px;width:130px;position:absolute;top:3px;left:3px;" src="./assets/images/borders/{{servant.level}}.png"/>
-                <p style="width:130px;top: -35px;position: relative;font-size: 15px;text-align: center;color:white;text-shadow: 1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
-                    white-space: break-spaces;line-height: 10px;left:3px">{{servant.nom}}</p>
-                    <p *ngIf="getServLevel2(servant)>0" style="bottom: 30px;position: absolute;font-size: 17px;width: 25px;text-align: center;color: white;text-shadow: 1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
-                      background-color: green;border-radius: 20px;border: 2px ridge #202020;right: -12px;z-index: 2;">{{getServLevel2(servant)}}</p>
-                    <p style="bottom: 0px;position: absolute;font-size: 17px;width: 25px;text-align: center;color: white;text-shadow: 1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
-                    background-color: #aa2002;border-radius: 20px;border: 2px ridge #202020;right: -12px;z-index: 2;">{{servant.qte}}</p>
-              </div>
-            </div>
-          </div>
-          <div style="display:flex;justify-content: center;" class="sellContener">
-            <p style="position: absolute;top: 0px;right: 10px;" class="clickable" (click)="createVente=false">x</p>
-            <div style="height:207px;position: relative;" *ngIf="persoToSell" class="clickable" (click)="persoToExchange=undefined;persoToSell=undefined;">
-              <img [class.golden]="sellWithTitle" draggable="false" style="height:207px;width:130px;border:3px ridge #202020;box-shadow: black -9px 8px 15px;" src="{{getImg(this.id,persoToSell)}}"/>
-              <img draggable="false" style="height:207px;width:130px;position:absolute;top:3px;left:3px;" src="./assets/images/borders/{{persoToSell.level}}.png"/>
-              <p style="width:130px;top: -35px;position: relative;font-size: 15px;text-align: center;color:white;text-shadow: 1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
-                  white-space: break-spaces;line-height: 10px;left:3px">{{persoToSell.nom}}</p>
-            </div>
-            <div *ngIf="persoToSell" class="blocSell">
-              <p class="clickable" [class.disabledButton]="disableTitleToggle()" [class.red]="!sellWithTitle" (click)="sellWithTitle=!sellWithTitle">Sell with Title</p>
-              <p class="clickable" [class.red]="sellType!='trade'" (click)="sellType='trade'" style="margin-top:30px">Trade a Servant</p>
-              <p class="clickable" [class.red]="sellType!='quartz'" (click)="sellType='quartz'">Sell for Quartz</p>
-            </div>
-            <div *ngIf="persoToExchange&&sellType=='trade'" class="blocSell">
-              <p class="clickable" [class.disabledButton]="!isTitleSellToggable2()" [class.red]="!exchangeWithTitle" (click)="exchangeWithTitle=!exchangeWithTitle">Exchange with Title</p>
-            </div>
-            <div style="position: relative;" *ngIf="persoToExchange&&sellType=='trade'"  class="clickable" (click)="persoToExchange=undefined">
-              <img [class.golden]="exchangeWithTitle" draggable="false" style="height:207px;width:130px;border:3px ridge #202020;box-shadow: black -9px 8px 15px;" src="{{persoToExchange.img1}}"/>
-              <img draggable="false" style="height:207px;width:130px;position:absolute;top:3px;left:3px;" src="./assets/images/borders/{{persoToExchange.level}}.png"/>
-              <p style="width:130px;top: -35px;position: relative;font-size: 15px;text-align: center;color:white;text-shadow: 1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
-                  white-space: break-spaces;line-height: 10px;left:3px">{{persoToExchange.nom}}</p>
-            </div>
-            <div style="position: relative;top: 90px;height:50px;" *ngIf="sellType=='quartz'" >
-              <img draggable="false" src="./assets/images/quartz.png" style="position: absolute;height: 60px;top: -14px;left: -18px;"/>
-              <input type="text" [(ngModel)]="sellQuartz" style="width: 200px;" placeholder="Prix.."/>
-            </div>
-          </div>
-          <div style="display:flex;justify-content: center;position: absolute;width: 100%;bottom:15px">
-            <button [class.disabledButton]="isDisabledSell()" style="width:200px;margin-top:0px;" (click)="this.recherche='';sellServant()">Vendre</button>
-          </div>
-        </div>
-
-        <!-- <SHOP -->
-
-
-        <input type="text" placeholder="Recherche.." [(ngModel)]="recherche" style="left: 26%;position: relative;width:200px;top:-8px"/>
-        <button style="position: absolute;left: 65%;top: 95px;width: 200px;" (click)="refreshBoutique()">Refresh</button>
-        <div class="options" style="width:190px;top:95px;">
-          <p [class.red]="filterSell!=''"                 (click)="filterSell=''">Tout Voir</p>
-          <p [class.red]="filterSell!='Mes Ventes'"       (click)="filterSell=='Mes Ventes'?filterSell='':filterSell='Mes Ventes'">Mes Ventes</p>
-          <p [class.red]="filterSell!='Achat Quartz'"     (click)="filterSell=='Achat Quartz'?filterSell='':filterSell='Achat Quartz'">Achat Quartz</p>
-          <p [class.red]="filterSell!='Achat Echanges'"   (click)="filterSell=='Achat Echanges'?filterSell='':filterSell='Achat Echanges'">Achat Echanges</p>
-          <p [class.red]="filterSell!='Achat Possibles'"  (click)="filterSell=='Achat Possibles'?filterSell='':filterSell='Achat Possibles'">Achat Possibles</p>
-          <p [class.red]="filterSell!='Titles'"           (click)="filterSell=='Titles'?filterSell='':filterSell='Titles'">Titles</p>
-          <p [class.red]="filterSell!='Servants 5*'"      (click)="filterSell=='Servants 5*'?filterSell='':filterSell='Servants 5*'">Servants 5*</p>
-          <p [class.red]="filterSell!='Servants 4*'"      (click)="filterSell=='Servants 4*'?filterSell='':filterSell='Servants 4*'">Servants 4*</p>
-          <button (click)="this.recherche='';sellType='trade';sellQuartz='';persoToSell=undefined;persoToExchange=undefined;createVente=true"  style="margin-top:30px">Vendre</button>
-        </div>
-        <div style="display:flex;justify-content: center;">
-          <div style="max-width: 79%;overflow-x: scroll;position: relative;top:-10px;">
-            <div style="display:flex;">
-              <div *ngFor="let sell of getShops()" class="sell">
-                <p>{{sell.nom}}</p>
-                <div *ngIf="sell.servant" style="position:relative;height:213px" class="clickable" (click)="clickServant(sell.servant)">
-                  <img draggable="false" style="height:207px;width:130px;border:3px ridge #202020;box-shadow: black -9px 8px 15px;" src="{{sell.servant.img1}}"/>
-                  <img draggable="false" style="height:207px;width:130px;position:absolute;top:3px;left:35px;" src="./assets/images/borders/{{sell.servant.level}}.png"/>
-                  <p style="width:130px;top: -30px;position: relative;font-size: 15px;text-align: center;color:white;text-shadow: 1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
-                  white-space: break-spaces;line-height: 10px;left:35px">{{sell.servant.nom}}</p>
-                </div>
-                <div *ngIf="sell.servantWithTitle" style="position:relative;height:213px" class="clickable" (click)="clickServant(sell.servantWithTitle)">
-                  <img class="golden" draggable="false" style="height:207px;width:130px;border:3px ridge #202020;box-shadow: black -9px 8px 15px;" src="{{sell.servantWithTitle.img1}}"/>
-                  <img draggable="false" style="height:207px;width:130px;position:absolute;top:3px;left:35px;" src="./assets/images/borders/{{sell.servantWithTitle.level}}.png"/>
-                  <p style="width:130px;top: -30px;position: relative;font-size: 15px;text-align: center;color:white;text-shadow: 1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
-                  white-space: break-spaces;line-height: 10px;left:35px">{{sell.servantWithTitle.nom}}</p>
-                </div>
-                <p style="margin: 20px 0px;">Contre :</p>
-                <div *ngIf="sell.servantPrice" style="position:relative;height:213px"  class="clickable" (click)="clickServant(sell.servantPrice)">
-                  <img draggable="false" style="height:207px;width:130px;border:3px ridge #202020;box-shadow: black -9px 8px 15px;" src="{{sell.servantPrice.img1}}"/>
-                  <img draggable="false" style="height:207px;width:130px;position:absolute;top:3px;left:35px;" src="./assets/images/borders/{{sell.servantPrice.level}}.png"/>
-                  <p style="width:130px;top: -30px;position: relative;font-size: 15px;text-align: center;color:white;text-shadow: 1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
-                  white-space: break-spaces;line-height: 10px;left:35px">{{sell.servantPrice.nom}}</p>
-                </div>
-                <div *ngIf="sell.servantPriceWithTitle" style="position:relative;height:213px"  class="clickable" (click)="clickServant(sell.servantPriceWithTitle)">
-                  <img class="golden" draggable="false" style="height:207px;width:130px;border:3px ridge #202020;box-shadow: black -9px 8px 15px;" src="{{sell.servantPriceWithTitle.img1}}"/>
-                  <img draggable="false" style="height:207px;width:130px;position:absolute;top:3px;left:35px;" src="./assets/images/borders/{{sell.servantPriceWithTitle.level}}.png"/>
-                  <p style="width:130px;top: -30px;position: relative;font-size: 15px;text-align: center;color:white;text-shadow: 1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
-                  white-space: break-spaces;line-height: 10px;left:35px">{{sell.servantPriceWithTitle.nom}}</p>
-                </div>
-                <div *ngIf="sell.price_quartz!=-1" class="score" style="left:20px;margin-top:10px;width:175px;margin-bottom:170px;top:65px">
-                  <p class="sc" style="top:-3px">{{sell.price_quartz}}</p><img draggable="false" src="./assets/images/quartz.png"/>
-                </div>
-                <button *ngIf="sell.nom!=user.nom" [class.disabledButton]="!got(sell.price_quartz,sell.servantPrice,sell.servantPriceWithTitle)" (click)="buyServ(sell)">Acheter</button>
-                <button *ngIf="sell.nom==user.nom" (click)="cancelSell(sell.id)">Annuler</button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      
-      <!-- <BANNIERE -->
-
-      <div style="position:relative;height:505px;left:150px;width:fit-content" *ngIf="state=='banner'">
-        <img draggable="false" style="position:absolute;width:1400px;" src="./assets/images/backBanner.png"/>
-        <p  class="nextBann" >Next Banner : {{nextChangeBanner < 10?'0':''}}{{nextChangeBanner}}:{{nextChangeBanners < 10?'0':''}}{{nextChangeBanners}}</p>
-        <div style="position:absolute;left:350px;top:135px" (mouseleave)="focus=undefined">
-          <div style="display:flex">
-            <div *ngFor="let perso of persos5" style="position:relative">
-              <img [style.display]="focus==perso?'unset':'none'" style="filter: drop-shadow(0px 0px 3px black);width: 40px;position: absolute;z-index: 2;height: 40px;bottom: -17px;left:20px;" src="./assets/images/classes/{{perso.classe}}.png"/>
-              <img draggable="false" style="height:90px;border: 3px ridge #222;width:66px;" src="{{perso.img1}}" (mouseover)="focus=perso" class="clickable" (click)="clickServant(perso)"/>
-              <div class="boosted2 row5"  style="pointer-events: none;z-index: 3;">
-                <p [style.display]="focus==perso?'unset':'none'">{{perso.level}}★</p>
-                <p [style.display]="focus==perso?'unset':'none'">{{perso.nom}}</p>
-              </div>
-            </div>
-          </div>
-          <div style="display:flex">
-            <div *ngFor="let perso of persos4" style="position:relative">
-              <img [style.display]="focus==perso?'unset':'none'" style="filter: drop-shadow(0px 0px 3px black);width: 40px;position: absolute;z-index: 2;height: 40px;bottom: -17px;left:20px;" src="./assets/images/classes/{{perso.classe}}.png"/>
-              <img draggable="false" style="height:90px;border: 3px ridge #222;width:66px;" src="{{perso.img1}}" (mouseover)="focus=perso" class="clickable" (click)="clickServant(perso)"/>
-              <div class="boosted2"  style="pointer-events: none;z-index: 3;">
-                <p [style.display]="focus==perso?'unset':'none'">{{perso.level}}★</p>
-                <p [style.display]="focus==perso?'unset':'none'">{{perso.nom}}</p>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="boosted1 left clickable" style="margin-top: 9px;left:9px;position:absolute;" (click)="clickServant(perso5)">
-          <img style="filter: drop-shadow(0px 0px 3px black);width: 80px;position: absolute;z-index: 2;height: 80px;bottom: -45px;right: -35px;" src="./assets/images/classes/{{perso5.classe}}.png"/>
-          <img draggable="false" style="border: 5px ridge #222;height:478px;" src="{{perso5.img1}}"/>
-          <div>
-            <p>{{perso5.level}}★</p>
-            <p>{{perso5.nom}}</p>
-          </div>
-        </div>
-        <div class="boosted1 right clickable" style="margin-top: 9px;position: absolute;left: 1043px"  (click)="enhance=false;clickServant(perso4)">
-          <img style="filter: drop-shadow(0px 0px 3px black);width: 80px;position: absolute;z-index: 2;height: 80px;bottom: -45px;left: -35px;" src="./assets/images/classes/{{perso4.classe}}.png"/>
-          <img draggable="false" style="border: 5px ridge #222;height: 478px;" src="{{perso4.img1}}"/>
-          <div>
-            <p>{{perso4.level}}★</p>
-            <p>{{perso4.nom}}</p>
-          </div>
-        </div>
-        
-        <img draggable="false" style="box-shadow: green 0px 0px 25px;position:absolute;width:1400px;pointer-events: none;" src="./assets/images/frontBanner.png" />
-  
-        <div style="position:absolute;left:420px;bottom:-10%;display:flex;">
-          <img draggable="false" [class.disabled]="cantInvoq(1)" class="summon" style="margin-right:50px;" src="./assets/images/summon1.png" (click)="startSummon(1)"/>
-          <img draggable="false" [class.disabled]="cantInvoq(10)" class="summon"  src="./assets/images/summon.png" (click)="startSummon(10)"/>
-        </div>
-      </div>
-
-      <!-- <INVOCATION -->
-  
-      <div [style.display]="state=='invocation'?'unset':'none'">
-        <video muted id="video1"  width="1407px" height="580px" style="left:150px;position: absolute;" (ended)="videoEnd()">
-            <source src="./assets/videos/cligno.mp4" type='video/mp4'/>
-        </video>
-  
-        <div [style.display]="isShow()?'unset':'none'">
-          <img draggable="false"  [@grow]='getGrowState()' [style.display]="!isCE()&&revealed()?'unset':'none'" style="position: absolute;height: 575px;left: 680px;
-          width:367px;" src="{{getImage()}}"/>
-    
-          <img draggable="false" [@rotate2]='getRotateState2()' [@grow]='getGrowState()' [style.display]="isCE()&&load?'unset':'none'" style="position: absolute;height: 575px;left: 680px;
-          width:367px;" src="{{getImage()}}"/>
-    
-          <img draggable="false" src="{{getBorder()}}" [style.display]="!isCE()&&revealed()?'unset':'none'"  [@grow]='getGrowState()'style="position: absolute;height: 570px;width:367px;left: 675px;pointer-events: none;border: 5px ridge #202020;box-shadow: 10px 10px 15px black;"/>
-          <img draggable="false" src="{{getBorder()}}" [style.display]="isCE()&&load?'unset':'none'"  [@rotate]='getRotateState()' [@grow]='getGrowState()' style="position: absolute;height: 570px;width:367px;left: 675px;pointer-events: none;border: 5px ridge #202020;box-shadow: 10px 10px 15px black;" />
-                
-          <p *ngIf="revealed()||isCE()" [@grow]='getGrowState()' [@rotate]='getRotateState()'
-          style="position: absolute;height: 575px;width:367px;left: 687px;pointer-events: none;font-size: 35px;bottom: 245px;text-align: center;color:white;height:auto;
-          text-shadow: 4px 0 black, 0 1px black, 1px 0 black, 0 -1px black;line-height: 25px;">{{getName()}}</p>
-    
-          <img draggable="false" *ngIf="load&&!isCE()" [@rotate]='getRotateState()' [@crop]='getCropState()' style="position: absolute;height: 575px;left: 675px;width:367px;" src="{{getBack()}}"/>
-        </div>
-  
-      </div>
-
-      <!-- <FOOTER -->
-
-      <div class="footer" style="z-index: 3;box-shadow: white 1px -1px 10px;position: absolute;bottom: 0px;width: 99%;height: 190px;background-color: rgba(100,150,200,0.8);border: 3px ridge orange;display:flex;justify-content: space-around;">
-        <img draggable="false" (click)="clickMenu();profile=undefined;state!='invocation'?clickPvm():null" src="./assets/images/pvmButton.png"/>
-        <img draggable="false" (click)="clickMenu();profile=undefined;state!='invocation'?state='formation':null" src="./assets/images/formationButton.png"/>
-        <img draggable="false" (click)="clickMenu();profile=undefined;state!='invocation'?state='banner':null" src="./assets/images/summonButton.png"/>
-        <img draggable="false" (click)="clickMenu();profile=undefined;state!='invocation'?state='friends':null" src="./assets/images/friendsButton.png"/>
-        <img draggable="false" (click)="clickMenu();profile=undefined;state!='invocation'?state='shop':null" src="./assets/images/shopButton.png"/>
-        <img draggable="false" (click)="clickMenu();state!='invocation'?profile?profile=undefined:setProfile(id):null" src="./assets/images/profileButton.png"/>
-      </div>
-    </div>
-    
+</div>

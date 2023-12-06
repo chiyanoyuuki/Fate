@@ -6,10 +6,14 @@ import { AppComponent } from './app.component';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { MatTooltipModule} from '@angular/material/tooltip';
+import { CardpersoComponent } from './cardperso/cardperso.component';
+import { IconepersoComponent } from './iconeperso/iconeperso.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    CardpersoComponent,
+    IconepersoComponent
   ],
   imports: [
     BrowserModule,
