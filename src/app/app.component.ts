@@ -543,7 +543,7 @@ export class AppComponent implements OnInit
     let dateNow = new Date().getTime();
     let lastCagnotteDate = new Date(this.user.cagnotte).getTime();
     let minutes = Math.floor((dateNow-lastCagnotteDate)/60000);
-    this.cagnotte = Math.floor(minutes/5);
+    this.cagnotte = Math.floor(minutes/3);
     if(this.cagnotte>60)this.cagnotte = 60;
     else if(this.cagnotte<0)this.cagnotte = 0;
   }
