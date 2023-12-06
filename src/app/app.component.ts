@@ -1475,6 +1475,7 @@ export class AppComponent implements OnInit
     let servants = vente.propose_servants;
     let titles = vente.propose_titles;
     let truetitles = vente.propose_truetitles;
+    
     if(type=="price")
     {
       userid = this.user.id;
@@ -1483,12 +1484,12 @@ export class AppComponent implements OnInit
       servants = vente.price_servants;
       titles = vente.price_titles;
       truetitles = vente.price_truetitles;
+    }
 
-      if(quartz>0)
-      {
-        this.FATEset("UPDATE fate2_users SET quartz=quartz-"+quartz+" WHERE id="+userid);
-        this.FATEset("UPDATE fate2_users SET quartz=quartz+"+quartz+" WHERE id="+boughtuserid);
-      }
+    if(quartz>0)
+    {
+      this.FATEset("UPDATE fate2_users SET quartz=quartz-"+quartz+" WHERE id="+userid);
+      this.FATEset("UPDATE fate2_users SET quartz=quartz+"+quartz+" WHERE id="+boughtuserid);
     }
 
     if(servants.length>0)
