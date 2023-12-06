@@ -107,9 +107,22 @@ export class AppComponent implements OnInit
   public persos: any = [];
   public actions:any = ["Perso", "Ascension", "Taille","Décalage X","Décalage Y"];
 
+  public bgmusic: any;
+  public sonbtn: any;
+
   constructor(private http: HttpClient){}
   ngOnInit()
   {
+    this.bgmusic = new Audio();
+    this.bgmusic.src = "./assets/Chaldea.ogg";
+    this.bgmusic.load();
+    this.bgmusic.volume = 0.1;
+    this.bgmusic.loop = true;
+
+    this.sonbtn = new Audio();
+    this.sonbtn.src = "./assets/confirm_button.mp3";
+    this.sonbtn.load();
+    this.sonbtn.volume = 0.5;
     /*this.persos.push(this.data.find((d:any)=>d.id==2));
     this.persos.push(this.data.find((d:any)=>d.id==11));
     this.persos.push(this.data.find((d:any)=>d.id==0));
@@ -273,7 +286,8 @@ export class AppComponent implements OnInit
   }
   initData(firstInit:any)
   {
-    this.timeToRefresh = this.devMode?60000:60000;
+    this.bgmusic.play();
+    this.timeToRefresh = this.devMode?60000:30000;
     let date = new Date();
     this.log("Refresh Data : "+("0"+date.getHours()).slice(-2)+":"+("0"+date.getMinutes()).slice(-2)+":"+("0"+date.getSeconds()).slice(-2));
     this.FATEmultiple(
@@ -557,6 +571,7 @@ export class AppComponent implements OnInit
   //MENU
   clickMenu(menu:any)
   {
+    this.sonbtn.play();
     if(this.page=='summon'||this.page==menu)return;
     
     if(menu=='pvm')this.initBattle();
