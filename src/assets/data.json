@@ -65,7 +65,6 @@
 	  "img2": "https://gamepress.gg/grandorder/sites/grandorder/files/2017-07/Artoria2.png",
 	  "img3": "https://gamepress.gg/grandorder/sites/grandorder/files/2017-07/Artoria3.png",
 	  "img4": "https://gamepress.gg/grandorder/sites/grandorder/files/2017-07/Artoria4.png",
-	  "qte": 3,
 	  "diff": -10,
 	  "decalageX": [
 		70,
@@ -153,7 +152,6 @@
 	  "img2": "https://gamepress.gg/grandorder/sites/grandorder/files/2017-07/005%20Nero%20Claudius%202_0.png",
 	  "img3": "https://gamepress.gg/grandorder/sites/grandorder/files/2019-04/005%20Nero%20Claudius%203.png",
 	  "img4": "https://gamepress.gg/grandorder/sites/grandorder/files/2017-07/005%20Nero%20Claudius%204.png",
-	  "qte": 4,
 	  "diff": 0
 	},
 	{
@@ -202,7 +200,6 @@
 	  "img2": "https://gamepress.gg/grandorder/sites/grandorder/files/2017-07/007%20Gaius%20Julius%20Caesar%202.png",
 	  "img3": "https://gamepress.gg/grandorder/sites/grandorder/files/2017-07/007%20Gaius%20Julius%20Caesar%203.png",
 	  "img4": "https://gamepress.gg/grandorder/sites/grandorder/files/2017-07/007%20Gaius%20Julius%20Caesar%204.png",
-	  "qte": 62,
 	  "diff": 10
 	},
 	{
@@ -411,7 +408,6 @@
 	  "img2": "https://gamepress.gg/grandorder/sites/grandorder/files/2017-07/015%20Euryale%202.png",
 	  "img3": "https://gamepress.gg/grandorder/sites/grandorder/files/2017-07/015%20Euryale%203.png",
 	  "img4": "https://gamepress.gg/grandorder/sites/grandorder/files/2017-07/015%20Euryale%204.png",
-	  "qte": 4,
 	  "diff": -10
 	},
 	{
@@ -463,7 +459,6 @@
 	  "img2": "https://gamepress.gg/grandorder/sites/grandorder/files/2017-07/017%20Cu%20Chulainn%202.png",
 	  "img3": "https://gamepress.gg/grandorder/sites/grandorder/files/2019-04/017%20Cu%20Chulainn%203.png",
 	  "img4": "https://gamepress.gg/grandorder/sites/grandorder/files/2017-07/017%20Cu%20Chulainn%204.png",
-	  "qte": 2,
 	  "diff": 110
 	},
 	{
@@ -543,7 +538,6 @@
 	  "img2": "https://gamepress.gg/grandorder/sites/grandorder/files/2017-07/020%20Cu%20Chulainn%20%28Prototype%29%202.png",
 	  "img3": "https://gamepress.gg/grandorder/sites/grandorder/files/2017-07/020%20Cu%20Chulainn%20%28Prototype%29%203.png",
 	  "img4": "https://gamepress.gg/grandorder/sites/grandorder/files/2017-07/020%20Cu%20Chulainn%20%28Prototype%29%204.png",
-	  "qte": 2,
 	  "diff": 130,
 	  "replace": -80
 	},
@@ -569,7 +563,6 @@
 	  "img2": "https://gamepress.gg/grandorder/sites/grandorder/files/2017-07/021%20Leonidas%202.png",
 	  "img3": "https://gamepress.gg/grandorder/sites/grandorder/files/2017-07/021%20Leonidas%203.png",
 	  "img4": "https://gamepress.gg/grandorder/sites/grandorder/files/2017-07/021%20Leonidas%204.png",
-	  "qte": 3,
 	  "diff": 60,
 	  "replace": -10
 	},
@@ -594,7 +587,6 @@
 	  "img2": "https://gamepress.gg/grandorder/sites/grandorder/files/2017-07/022%20Romulus%202.png",
 	  "img3": "https://gamepress.gg/grandorder/sites/grandorder/files/2017-07/022%20Romulus%203.png",
 	  "img4": "https://gamepress.gg/grandorder/sites/grandorder/files/2017-07/022%20Romulus%204.png",
-	  "qte": 1,
 	  "diff": 80
 	},
 	{
@@ -621,7 +613,6 @@
 	  "img2": "https://gamepress.gg/grandorder/sites/grandorder/files/2017-07/023%20Medusa%202.png",
 	  "img3": "https://gamepress.gg/grandorder/sites/grandorder/files/2017-07/023%20Medusa%203.png",
 	  "img4": "https://gamepress.gg/grandorder/sites/grandorder/files/2017-07/023%20Medusa%204.png",
-	  "qte": 1,
 	  "diff": 0
 	},
 	{
@@ -645,7 +636,6 @@
 	  "img2": "https://gamepress.gg/grandorder/sites/grandorder/files/2017-07/024%20St%20George%202.png",
 	  "img3": "https://gamepress.gg/grandorder/sites/grandorder/files/2017-07/024%20St%20George%203.png",
 	  "img4": "https://gamepress.gg/grandorder/sites/grandorder/files/2017-07/024%20St%20George%204.png",
-	  "qte": 1,
 	  "diff": 0
 	},
 	{
@@ -672,7 +662,6 @@
 	  "img2": "https://gamepress.gg/grandorder/sites/grandorder/files/2017-07/025%20Edward%20Teach%202.png",
 	  "img3": "https://gamepress.gg/grandorder/sites/grandorder/files/2017-07/025%20Edward%20Teach%203.png",
 	  "img4": "https://gamepress.gg/grandorder/sites/grandorder/files/2017-07/025%20Edward%20Teach%204.png",
-	  "qte": 3,
 	  "diff": 10
 	},
 	{
@@ -719,7 +708,6 @@
 	  "img2": "https://gamepress.gg/grandorder/sites/grandorder/files/2017-07/027%20Ushiwakamaru%202.png",
 	  "img3": "https://gamepress.gg/grandorder/sites/grandorder/files/2017-07/027%20Ushiwakamaru%203.png",
 	  "img4": "https://gamepress.gg/grandorder/sites/grandorder/files/2017-07/027%20Ushiwakamaru%204.png",
-	  "qte": 1,
 	  "diff": -10
 	},
 	{
@@ -743,7 +731,6 @@
 	  "img2": "https://gamepress.gg/grandorder/sites/grandorder/files/2017-07/028%20Alexander%202.png",
 	  "img3": "https://gamepress.gg/grandorder/sites/grandorder/files/2017-07/028%20Alexander%203.png",
 	  "img4": "https://gamepress.gg/grandorder/sites/grandorder/files/2017-07/028%20Alexander%204.png",
-	  "qte": 1,
 	  "diff": -20
 	},
 	{
@@ -821,7 +808,6 @@
 	  "img2": "https://gamepress.gg/grandorder/sites/grandorder/files/2017-07/031%20Medea%202.png",
 	  "img3": "https://gamepress.gg/grandorder/sites/grandorder/files/2017-07/031%20Medea%203.png",
 	  "img4": "https://gamepress.gg/grandorder/sites/grandorder/files/2017-07/031%20Medea%204.png",
-	  "qte": 1,
 	  "diff": 0
 	},
 	{
@@ -874,7 +860,6 @@
 	  "img2": "https://gamepress.gg/grandorder/sites/grandorder/files/2017-07/033%20Hans%20Christian%20Andersen%202.png",
 	  "img3": "https://gamepress.gg/grandorder/sites/grandorder/files/2017-07/033%20Hans%20Christian%20Andersen%203.png",
 	  "img4": "https://gamepress.gg/grandorder/sites/grandorder/files/2017-07/033%20Hans%20Christian%20Andersen%204.png",
-	  "qte": 1,
 	  "diff": -20
 	},
 	{
@@ -898,7 +883,6 @@
 	  "img2": "https://gamepress.gg/grandorder/sites/grandorder/files/2017-07/034%20William%20Shakespeare%202.png",
 	  "img3": "https://gamepress.gg/grandorder/sites/grandorder/files/2017-07/034%20William%20Shakespeare%203.png",
 	  "img4": "https://gamepress.gg/grandorder/sites/grandorder/files/2017-07/034%20William%20Shakespeare%204.png",
-	  "qte": 1,
 	  "diff": 0
 	},
 	{
@@ -922,7 +906,6 @@
 	  "img2": "https://gamepress.gg/grandorder/sites/grandorder/files/2017-07/035%20Mephistopheles%202.png",
 	  "img3": "https://gamepress.gg/grandorder/sites/grandorder/files/2017-07/035%20Mephistopheles%203.png",
 	  "img4": "https://gamepress.gg/grandorder/sites/grandorder/files/2017-07/035%20Mephistopheles%204.png",
-	  "qte": 1,
 	  "diff": 10
 	},
 	{
@@ -947,7 +930,6 @@
 	  "img2": "https://gamepress.gg/grandorder/sites/grandorder/files/2017-07/036%20Wolfgang%20Amaedus%20Mozart%202.png",
 	  "img3": "https://gamepress.gg/grandorder/sites/grandorder/files/2017-07/036%20Wolfgang%20Amaedus%20Mozart%203.png",
 	  "img4": "https://gamepress.gg/grandorder/sites/grandorder/files/2017-07/036%20Wolfgang%20Amaedus%20Mozart%204.png",
-	  "qte": 1,
 	  "diff": 10
 	},
 	{
@@ -1051,7 +1033,6 @@
 	  "img2": "https://gamepress.gg/grandorder/sites/grandorder/files/2017-07/040%20Cursed%20Arm%20Hassan%202.png",
 	  "img3": "https://gamepress.gg/grandorder/sites/grandorder/files/2017-07/040%20Cursed%20Arm%20Hassan%203.png",
 	  "img4": "https://gamepress.gg/grandorder/sites/grandorder/files/2017-07/040%20Cursed%20Arm%20Hassan%204.png",
-	  "qte": 1,
 	  "diff": 10
 	},
 	{
@@ -1104,7 +1085,6 @@
 	  "img2": "https://gamepress.gg/grandorder/sites/grandorder/files/2017-07/042%20Jing%20Ke%202.png",
 	  "img3": "https://gamepress.gg/grandorder/sites/grandorder/files/2017-07/042%20Jing%20Ke%203.png",
 	  "img4": "https://gamepress.gg/grandorder/sites/grandorder/files/2017-07/042%20Jing%20Ke%204.png",
-	  "qte": 1,
 	  "diff": 0
 	},
 	{
@@ -1129,7 +1109,6 @@
 	  "img2": "https://gamepress.gg/grandorder/sites/grandorder/files/2017-07/043%20Charles-Henri%20Sanson%202.png",
 	  "img3": "https://gamepress.gg/grandorder/sites/grandorder/files/2017-07/043%20Charles-Henri%20Sanson%203.png",
 	  "img4": "https://gamepress.gg/grandorder/sites/grandorder/files/2017-07/043%20Charles-Henri%20Sanson%204.png",
-	  "qte": 1,
 	  "diff": 10
 	},
 	{
@@ -1156,7 +1135,6 @@
 	  "img2": "https://gamepress.gg/grandorder/sites/grandorder/files/2017-07/044%20Phantom%20of%20the%20Opera%202.png",
 	  "img3": "https://gamepress.gg/grandorder/sites/grandorder/files/2017-07/044%20Phantom%20of%20the%20Opera%203.png",
 	  "img4": "https://gamepress.gg/grandorder/sites/grandorder/files/2017-07/044%20Phantom%20of%20the%20Opera%204.png",
-	  "qte": 1,
 	  "diff": 0
 	},
 	{
@@ -1275,7 +1253,6 @@
 	  "img2": "https://gamepress.gg/grandorder/sites/grandorder/files/2017-07/049%20Lu%20Bu%202_0.png",
 	  "img3": "https://gamepress.gg/grandorder/sites/grandorder/files/2017-07/049%20Lu%20Bu%203.png",
 	  "img4": "https://gamepress.gg/grandorder/sites/grandorder/files/2017-07/049%20Lu%20Bu%204.png",
-	  "qte": 1,
 	  "diff": 120
 	},
 	{
@@ -1300,7 +1277,6 @@
 	  "img2": "https://gamepress.gg/grandorder/sites/grandorder/files/2017-07/050%20Spartacus%202.png",
 	  "img3": "https://gamepress.gg/grandorder/sites/grandorder/files/2017-07/050%20Spartacus%203.png",
 	  "img4": "https://gamepress.gg/grandorder/sites/grandorder/files/2017-07/050%20Spartacus%204.png",
-	  "qte": 1,
 	  "diff": 30
 	},
 	{
@@ -1374,7 +1350,6 @@
 	  "img2": "https://gamepress.gg/grandorder/sites/grandorder/files/2017-07/053%20Asterios%202.png",
 	  "img3": "https://gamepress.gg/grandorder/sites/grandorder/files/2017-07/053%20Asterios%203.png",
 	  "img4": "https://gamepress.gg/grandorder/sites/grandorder/files/2017-07/053%20Asterios%204.png",
-	  "qte": 3,
 	  "diff": 80,
 	  "replace": -20
 	},
@@ -1400,7 +1375,6 @@
 	  "img2": "https://gamepress.gg/grandorder/sites/grandorder/files/2017-07/054%20Caligula%202.png",
 	  "img3": "https://gamepress.gg/grandorder/sites/grandorder/files/2017-07/054%20Caligula%203.png",
 	  "img4": "https://gamepress.gg/grandorder/sites/grandorder/files/2017-07/054%20Caligula%204.png",
-	  "qte": 2,
 	  "diff": 30
 	},
 	{
@@ -1425,7 +1399,6 @@
 	  "img2": "https://gamepress.gg/grandorder/sites/grandorder/files/2017-07/055%20Darius%20III%202.png",
 	  "img3": "https://gamepress.gg/grandorder/sites/grandorder/files/2017-07/055%20Darius%20III%203.png",
 	  "img4": "https://gamepress.gg/grandorder/sites/grandorder/files/2017-07/055%20Darius%20III%204.png",
-	  "qte": 1,
 	  "diff": 50,
 	  "replace": -10
 	},
@@ -1451,7 +1424,6 @@
 	  "img2": "https://gamepress.gg/grandorder/sites/grandorder/files/2017-07/056%20Kiyohime%202.png",
 	  "img3": "https://gamepress.gg/grandorder/sites/grandorder/files/2017-07/056%20Kiyohime%203.png",
 	  "img4": "https://gamepress.gg/grandorder/sites/grandorder/files/2017-07/056%20Kiyohime%204.png",
-	  "qte": 3,
 	  "diff": -20
 	},
 	{
@@ -1478,7 +1450,6 @@
 	  "img2": "https://gamepress.gg/grandorder/sites/grandorder/files/2017-07/057%20Eric%20Bloodaxe%202.png",
 	  "img3": "https://gamepress.gg/grandorder/sites/grandorder/files/2017-07/057%20Eric%20Bloodaxe%203_0.png",
 	  "img4": "https://gamepress.gg/grandorder/sites/grandorder/files/2017-07/057%20Eric%20Bloodaxe%204.png",
-	  "qte": 1,
 	  "diff": 60,
 	  "replace": -20
 	},
@@ -1628,7 +1599,6 @@
 	  "img2": "https://gamepress.gg/grandorder/sites/grandorder/files/2017-09/David2.png",
 	  "img3": "https://gamepress.gg/grandorder/sites/grandorder/files/2017-09/David3.png",
 	  "img4": "https://gamepress.gg/grandorder/sites/grandorder/files/2017-09/David4.png",
-	  "qte": 1,
 	  "diff": -20
 	},
 	{
@@ -1814,7 +1784,6 @@
 	  "img2": "https://gamepress.gg/grandorder/sites/grandorder/files/2017-11/0712.jpg",
 	  "img3": "https://gamepress.gg/grandorder/sites/grandorder/files/2017-11/0713.jpg",
 	  "img4": "https://gamepress.gg/grandorder/sites/grandorder/files/2017-11/0714.jpg",
-	  "qte": 1,
 	  "diff": 30
 	},
 	{
@@ -1839,7 +1808,6 @@
 	  "img2": "https://gamepress.gg/grandorder/sites/grandorder/files/2017-11/0722.jpg",
 	  "img3": "https://gamepress.gg/grandorder/sites/grandorder/files/2017-11/0723.jpg",
 	  "img4": "https://gamepress.gg/grandorder/sites/grandorder/files/2017-11/0724.jpg",
-	  "qte": 1,
 	  "diff": 20
 	},
 	{
@@ -2023,7 +1991,6 @@
 	  "img2": "https://gamepress.gg/grandorder/sites/grandorder/files/2017-12/0792.jpg",
 	  "img3": "https://gamepress.gg/grandorder/sites/grandorder/files/2017-12/0793.jpg",
 	  "img4": "https://gamepress.gg/grandorder/sites/grandorder/files/2017-12/0794.jpg",
-	  "qte": 1,
 	  "diff": 0
 	},
 	{
@@ -2047,7 +2014,6 @@
 	  "img2": "https://gamepress.gg/grandorder/sites/grandorder/files/2017-12/0802.jpg",
 	  "img3": "https://gamepress.gg/grandorder/sites/grandorder/files/2017-12/0803.jpg",
 	  "img4": "https://gamepress.gg/grandorder/sites/grandorder/files/2017-12/0804.jpg",
-	  "qte": 1,
 	  "diff": 50,
 	  "replace": -10
 	},
@@ -2072,7 +2038,6 @@
 	  "img2": "https://gamepress.gg/grandorder/sites/grandorder/files/2017-12/0812.jpg",
 	  "img3": "https://gamepress.gg/grandorder/sites/grandorder/files/2017-12/0813.jpg",
 	  "img4": "https://gamepress.gg/grandorder/sites/grandorder/files/2017-12/0814.jpg",
-	  "qte": 1,
 	  "diff": -20
 	},
 	{
@@ -2340,7 +2305,6 @@
 	  "img2": "https://gamepress.gg/grandorder/sites/grandorder/files/2018-02/Shiki%201-3_4.png",
 	  "img3": "https://gamepress.gg/grandorder/sites/grandorder/files/2018-02/Shiki%201-3_5.png",
 	  "img4": "https://gamepress.gg/grandorder/sites/grandorder/files/2018-02/Shiki%204_0.png",
-	  "qte": 1,
 	  "diff": 0
 	},
 	{
@@ -2415,7 +2379,6 @@
 	  "img2": "https://gamepress.gg/grandorder/sites/grandorder/files/2018-02/Kogil2.png",
 	  "img3": "https://gamepress.gg/grandorder/sites/grandorder/files/2018-02/Kogil3.png",
 	  "img4": "https://gamepress.gg/grandorder/sites/grandorder/files/2018-02/Kogil4.png",
-	  "qte": 1,
 	  "diff": -40
 	},
 	{
@@ -2787,7 +2750,6 @@
 	  "img2": "https://gamepress.gg/grandorder/sites/grandorder/files/2018-03/1102.jpg",
 	  "img3": "https://gamepress.gg/grandorder/sites/grandorder/files/2018-03/1103.jpg",
 	  "img4": "https://gamepress.gg/grandorder/sites/grandorder/files/2018-03/1104.jpg",
-	  "qte": 1,
 	  "diff": -30
 	},
 	{
@@ -3135,7 +3097,6 @@
 	  "img2": "https://gamepress.gg/grandorder/sites/grandorder/files/2018-03/1242.jpg",
 	  "img3": "https://gamepress.gg/grandorder/sites/grandorder/files/2018-03/1243.jpg",
 	  "img4": "https://gamepress.gg/grandorder/sites/grandorder/files/2018-03/1244.jpg",
-	  "qte": 3,
 	  "diff": -20
 	},
 	{
@@ -3156,7 +3117,6 @@
 	  "img2": "https://gamepress.gg/grandorder/sites/grandorder/files/2018-04/1252.jpg",
 	  "img3": "https://gamepress.gg/grandorder/sites/grandorder/files/2018-04/1253.jpg",
 	  "img4": "https://gamepress.gg/grandorder/sites/grandorder/files/2018-04/1254.jpg",
-	  "qte": 1,
 	  "diff": 70
 	},
 	{
@@ -3180,7 +3140,6 @@
 	  "img2": "https://gamepress.gg/grandorder/sites/grandorder/files/2018-04/1262.jpg",
 	  "img3": "https://gamepress.gg/grandorder/sites/grandorder/files/2018-04/1263.jpg",
 	  "img4": "https://gamepress.gg/grandorder/sites/grandorder/files/2018-04/1264.jpg",
-	  "qte": 3,
 	  "diff": 80
 	},
 	{
@@ -3440,7 +3399,6 @@
 	  "img2": "https://gamepress.gg/grandorder/sites/grandorder/files/2018-04/1372.jpg",
 	  "img3": "https://gamepress.gg/grandorder/sites/grandorder/files/2018-04/1373.jpg",
 	  "img4": "https://gamepress.gg/grandorder/sites/grandorder/files/2018-04/1374.jpg",
-	  "qte": 1,
 	  "diff": -10
 	},
 	{
@@ -3710,7 +3668,6 @@
 	  "img2": "https://gamepress.gg/grandorder/sites/grandorder/files/2017-09/Jaguarman2.png",
 	  "img3": "https://gamepress.gg/grandorder/sites/grandorder/files/2017-09/Jaguarman3.png",
 	  "img4": "https://gamepress.gg/grandorder/sites/grandorder/files/2017-09/Jaguarman4.png",
-	  "qte": 2,
 	  "diff": 10
 	},
 	{
@@ -4033,7 +3990,6 @@
 	  "img2": "https://gamepress.gg/grandorder/sites/grandorder/files/2018-04/1622.jpg",
 	  "img3": "https://gamepress.gg/grandorder/sites/grandorder/files/2018-04/1623.jpg",
 	  "img4": "https://gamepress.gg/grandorder/sites/grandorder/files/2018-04/1624.jpg",
-	  "qte": 1,
 	  "diff": 30
 	},
 	{
@@ -4268,7 +4224,6 @@
 	  "img2": "https://gamepress.gg/grandorder/sites/grandorder/files/2018-03/1722.jpg",
 	  "img3": "https://gamepress.gg/grandorder/sites/grandorder/files/2018-03/1723.jpg",
 	  "img4": "https://gamepress.gg/grandorder/sites/grandorder/files/2018-03/1724.jpg",
-	  "qte": 2,
 	  "diff": 30
 	},
 	{
@@ -4317,7 +4272,6 @@
 	  "img2": "https://gamepress.gg/grandorder/sites/grandorder/files/2018-04/1742.jpg",
 	  "img3": "https://gamepress.gg/grandorder/sites/grandorder/files/2018-04/1743.jpg",
 	  "img4": "https://gamepress.gg/grandorder/sites/grandorder/files/2018-04/1744.jpg",
-	  "qte": 1,
 	  "diff": -50
 	},
 	{
@@ -4610,7 +4564,6 @@
 	  "img2": "https://gamepress.gg/grandorder/sites/grandorder/files/2018-04/1862.jpg",
 	  "img3": "https://gamepress.gg/grandorder/sites/grandorder/files/2018-04/1863.jpg",
 	  "img4": "https://gamepress.gg/grandorder/sites/grandorder/files/2018-04/1864.jpg",
-	  "qte": 1,
 	  "diff": 120,
 	  "replace": -80
 	},
@@ -5013,7 +4966,6 @@
 	  "img2": "https://gamepress.gg/grandorder/sites/grandorder/files/2018-08/203_Avicebron_2.png",
 	  "img3": "https://gamepress.gg/grandorder/sites/grandorder/files/2018-08/203_Avicebron_3.png",
 	  "img4": "https://gamepress.gg/grandorder/sites/grandorder/files/2018-08/203_Avicebron_4.png",
-	  "qte": 3,
 	  "diff": 40
 	},
 	{
@@ -5038,7 +4990,6 @@
 	  "img2": "https://gamepress.gg/grandorder/sites/grandorder/files/2018-08/204_Antonio%20Salieri_2.png",
 	  "img3": "https://gamepress.gg/grandorder/sites/grandorder/files/2018-08/204_Antonio%20Salieri_3.png",
 	  "img4": "https://gamepress.gg/grandorder/sites/grandorder/files/2018-08/204_Antonio%20Salieri_4.png",
-	  "qte": 2,
 	  "diff": 100,
 	  "replace": -50
 	},
@@ -5699,7 +5650,6 @@
 	  "img2": "https://gamepress.gg/grandorder/sites/grandorder/files/2018-12/231_Red%20Hare_2.png",
 	  "img3": "https://gamepress.gg/grandorder/sites/grandorder/files/2018-12/231_Red%20Hare_3.png",
 	  "img4": "https://gamepress.gg/grandorder/sites/grandorder/files/2018-12/231_Red%20Hare_4.png",
-	  "qte": 1,
 	  "diff": 180,
 	  "replace": -70
 	},
@@ -6063,7 +6013,6 @@
 	  "img2": "https://gamepress.gg/grandorder/sites/grandorder/files/2019-06/246_William%20Tell_2.png",
 	  "img3": "https://gamepress.gg/grandorder/sites/grandorder/files/2019-06/246_William%20Tell_3.png",
 	  "img4": "https://gamepress.gg/grandorder/sites/grandorder/files/2019-06/246_William%20Tell_4.png",
-	  "qte": 1,
 	  "diff": 40
 	},
 	{
@@ -6180,7 +6129,6 @@
 	  "img2": "https://gamepress.gg/grandorder/sites/grandorder/files/2019-07/251_Mori%20Nagayoshi_2_0.png",
 	  "img3": "https://gamepress.gg/grandorder/sites/grandorder/files/2019-07/251_Mori%20Nagayoshi_3.png",
 	  "img4": "https://gamepress.gg/grandorder/sites/grandorder/files/2019-07/251_Mori%20Nagayoshi_4.png",
-	  "qte": 4,
 	  "diff": 130,
 	  "replace": -10
 	},
@@ -6257,7 +6205,6 @@
 	  "img2": "https://gamepress.gg/grandorder/sites/grandorder/files/2019-08/Jason%202.png",
 	  "img3": "https://gamepress.gg/grandorder/sites/grandorder/files/2019-08/Jason%203.png",
 	  "img4": "https://gamepress.gg/grandorder/sites/grandorder/files/2019-08/Jason%204.png",
-	  "qte": 1,
 	  "diff": 0
 	},
 	{
@@ -6281,7 +6228,6 @@
 	  "img2": "https://gamepress.gg/grandorder/sites/grandorder/files/2019-08/Paris%202.png",
 	  "img3": "https://gamepress.gg/grandorder/sites/grandorder/files/2019-08/Paris%203.png",
 	  "img4": "https://gamepress.gg/grandorder/sites/grandorder/files/2019-08/Paris%204.png",
-	  "qte": 1,
 	  "diff": -10
 	},
 	{
@@ -6308,7 +6254,6 @@
 	  "img2": "https://gamepress.gg/grandorder/sites/grandorder/files/2019-08/Gareth%202_0.png",
 	  "img3": "https://gamepress.gg/grandorder/sites/grandorder/files/2019-08/Gareth%203.png",
 	  "img4": "https://gamepress.gg/grandorder/sites/grandorder/files/2019-08/Gareth%204.png",
-	  "qte": 1,
 	  "diff": 130,
 	  "replace": -70
 	},
@@ -6361,7 +6306,6 @@
 	  "img2": "https://gamepress.gg/grandorder/sites/grandorder/files/2019-08/Chen%20Gong%202.png",
 	  "img3": "https://gamepress.gg/grandorder/sites/grandorder/files/2019-08/Chen%20Gong%203.png",
 	  "img4": "https://gamepress.gg/grandorder/sites/grandorder/files/2019-08/Chen%20Gong%204.png",
-	  "qte": 1,
 	  "diff": 40
 	},
 	{
@@ -6386,7 +6330,6 @@
 	  "img2": "https://gamepress.gg/grandorder/sites/grandorder/files/2019-08/Charlotte%20Corday%202.png",
 	  "img3": "https://gamepress.gg/grandorder/sites/grandorder/files/2019-08/Charlotte%20Corday%203.png",
 	  "img4": "https://gamepress.gg/grandorder/sites/grandorder/files/2019-08/Charlotte%20Corday%204.png",
-	  "qte": 1,
 	  "diff": -20
 	},
 	{
@@ -6410,7 +6353,6 @@
 	  "img2": "https://gamepress.gg/grandorder/sites/grandorder/files/2019-08/Salome%202.png",
 	  "img3": "https://gamepress.gg/grandorder/sites/grandorder/files/2019-08/Salome%203.png",
 	  "img4": "https://gamepress.gg/grandorder/sites/grandorder/files/2019-08/Salome%204.png",
-	  "qte": 1,
 	  "diff": 100,
 	  "replace": -10
 	},
@@ -6959,7 +6901,6 @@
 	  "img2": "https://gamepress.gg/grandorder/sites/grandorder/files/2020-05/282_Kijyo%20Koyo_2.png",
 	  "img3": "https://gamepress.gg/grandorder/sites/grandorder/files/2020-05/282_Kijyo%20Koyo_3.png",
 	  "img4": "https://gamepress.gg/grandorder/sites/grandorder/files/2020-05/282_Kijyo%20Koyo_4.png",
-	  "qte": 1,
 	  "diff": 210,
 	  "replace": -110
 	},
@@ -7251,7 +7192,6 @@
 	  "img2": "https://gamepress.gg/grandorder/sites/grandorder/files/2020-10/294_Oda%20Nobukatsu_2.png",
 	  "img3": "https://gamepress.gg/grandorder/sites/grandorder/files/2020-10/294_Oda%20Nobukatsu_3.png",
 	  "img4": "https://gamepress.gg/grandorder/sites/grandorder/files/2020-10/294_Oda%20Nobukatsu_4.png",
-	  "qte": 2,
 	  "diff": 30
 	},
 	{
@@ -7504,7 +7444,6 @@
 	  "img2": "https://gamepress.gg/grandorder/sites/grandorder/files/2021-01/304_Kiichi%20Hogen_1-3_0.png",
 	  "img3": "https://gamepress.gg/grandorder/sites/grandorder/files/2021-01/304_Kiichi%20Hogen_1-3.png",
 	  "img4": "https://gamepress.gg/grandorder/sites/grandorder/files/2021-01/304_Kiichi%20Hogen_4.png",
-	  "qte": 1,
 	  "diff": 60,
 	  "replace": -10
 	},
@@ -8411,7 +8350,6 @@
 	  "img2": "https://gamepress.gg/grandorder/sites/grandorder/files/2022-04/341_Mary%20Anning_2.png",
 	  "img3": "https://gamepress.gg/grandorder/sites/grandorder/files/2022-04/341_Mary%20Anning_3.png",
 	  "img4": "https://gamepress.gg/grandorder/sites/grandorder/files/2022-04/341_Mary%20Anning_4.png",
-	  "qte": 1,
 	  "diff": -20
 	},
 	{
@@ -8509,7 +8447,6 @@
 	  "img2": "https://gamepress.gg/grandorder/sites/grandorder/files/2022-06/345_Kriemhild_2.png",
 	  "img3": "https://gamepress.gg/grandorder/sites/grandorder/files/2022-06/345_Kriemhild_3.png",
 	  "img4": "https://gamepress.gg/grandorder/sites/grandorder/files/2022-06/345_Kriemhild_4.png",
-	  "qte": 1,
 	  "diff": 10
 	},
 	{
@@ -8590,7 +8527,6 @@
 	  "img2": "https://gamepress.gg/grandorder/sites/grandorder/files/2022-06/348_Zhang%20Jiao_2.png",
 	  "img3": "https://gamepress.gg/grandorder/sites/grandorder/files/2022-06/348_Zhang%20Jiao_3.png",
 	  "img4": "https://gamepress.gg/grandorder/sites/grandorder/files/2022-06/348_Zhang%20Jiao_4.png",
-	  "qte": 2,
 	  "diff": 10
 	},
 	{
@@ -8688,7 +8624,6 @@
 	  "img2": "https://gamepress.gg/grandorder/sites/grandorder/files/2022-07/352_Xu%20Fu_2.png",
 	  "img3": "https://gamepress.gg/grandorder/sites/grandorder/files/2022-07/352_Xu%20Fu_3.png",
 	  "img4": "https://gamepress.gg/grandorder/sites/grandorder/files/2022-07/352_Xu%20Fu_4.png",
-	  "qte": 1,
 	  "diff": -10
 	},
 	{
@@ -9028,7 +8963,6 @@
 	  "img2": "https://gamepress.gg/grandorder/sites/grandorder/files/2022-10/366_Huang%20Feihu_2.png",
 	  "img3": "https://gamepress.gg/grandorder/sites/grandorder/files/2022-10/366_Huang%20Feihu_3.png",
 	  "img4": "https://gamepress.gg/grandorder/sites/grandorder/files/2022-10/366_Huang%20Feihu_4.png",
-	  "qte": 1,
 	  "diff": 20
 	},
 	{
@@ -9306,7 +9240,6 @@
 	  "img2": "https://gamepress.gg/grandorder/sites/grandorder/files/2023-04/377_Sodoms%20Beast%20Draco_2.png",
 	  "img3": "https://gamepress.gg/grandorder/sites/grandorder/files/2023-05/377_Sodoms%20Beast%20Draco_3.png",
 	  "img4": "https://gamepress.gg/grandorder/sites/grandorder/files/2023-05/377_Sodoms%20Beast%20Draco_4.png",
-	  "qte": 1,
 	  "diff": -30
 	},
 	{
@@ -9358,7 +9291,6 @@
 	  "img2": "https://gamepress.gg/grandorder/sites/grandorder/files/2023-04/379_Setanta_1-3_2.png",
 	  "img3": "https://gamepress.gg/grandorder/sites/grandorder/files/2023-04/379_Setanta_1-3_4.png",
 	  "img4": "https://gamepress.gg/grandorder/sites/grandorder/files/2023-04/379_Setanta_4.png",
-	  "qte": 1,
 	  "diff": 0
 	},
 	{
@@ -9459,7 +9391,6 @@
 	  "img2": "https://gamepress.gg/grandorder/sites/grandorder/files/2023-06/383_Durga_2.png",
 	  "img3": "https://gamepress.gg/grandorder/sites/grandorder/files/2023-06/383_Durga_3_0.png",
 	  "img4": "https://gamepress.gg/grandorder/sites/grandorder/files/2023-06/383_Durga_4_1.png",
-	  "qte": 1,
 	  "diff": 70
 	},
 	{
@@ -9495,7 +9426,6 @@
 	  "nom": "Craft Essence",
 	  "img1": "https://gamepress.gg/grandorder/sites/grandorder/files/2017-07/craft_essence_002.jpg",
 	  "level": 1,
-	  "qte": 10,
 	  "diff": 0
 	},
 	{
@@ -9503,32 +9433,28 @@
 	  "id": 386,
 	  "nom": "Craft Essence",
 	  "img1": "https://gamepress.gg/grandorder/sites/grandorder/files/2017-07/craft_essence_007_0.jpg",
-	  "level": 2,
-	  "qte": 8
+	  "level": 2
 	},
 	{
 	  "scale": 1,
 	  "id": 387,
 	  "nom": "Craft Essence",
 	  "img1": "https://gamepress.gg/grandorder/sites/grandorder/files/2017-07/craft_essence_012.jpg",
-	  "level": 3,
-	  "qte": 6
+	  "level": 3
 	},
 	{
 	  "scale": 1,
 	  "id": 388,
 	  "nom": "Craft Essence",
 	  "img1": "https://gamepress.gg/grandorder/sites/grandorder/files/2017-07/craft_essence_027.jpg",
-	  "level": 4,
-	  "qte": 8
+	  "level": 4
 	},
 	{
 	  "scale": 1,
 	  "id": 389,
 	  "nom": "Craft Essence",
 	  "img1": "https://gamepress.gg/grandorder/sites/grandorder/files/2017-07/craft_essence_031.jpg",
-	  "level": 5,
-	  "qte": 902
+	  "level": 5
 	},
 	{
 	  "scale": 1,
@@ -9718,8 +9644,7 @@
 	  "img4": "./assets/images/servants/shirou/3.jpg",
 	  "sprite1": "./assets/images/servants/shirou/sprite.png",
 	  "special": true,
-	  "turn": true,
-	  "qte": 1
+	  "turn": true
 	},
 	{
 	  "scale": 1,
@@ -9794,8 +9719,7 @@
 	  "img3": "./assets/images/servants/olgamarie/0.jpg",
 	  "img4": "./assets/images/servants/olgamarie/1.jpg",
 	  "sprite1": "./assets/images/servants/olgamarie/sprite.png",
-	  "special": true,
-	  "qte": 1
+	  "special": true
 	},
 	{
 	  "scale": 1,
@@ -10077,8 +10001,7 @@
 	  "classe": "Foreigner",
 	  "done": false,
 	  "img1": "./assets/images/servants/cnocnaRiabh/0.png",
-	  "special": false,
-	  "qte": 1
+	  "special": false
 	},
 	{
 	  "scale": 1,

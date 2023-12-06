@@ -981,7 +981,7 @@ export class AppComponent implements OnInit
   }
   getTrueMaster()
   {
-    let tmp = this.titles.find((t:any)=>t.servant_id==this.bigCard.id&&t.first=="1");
+    let tmp = this.titles.find((t:any)=>t.servant_id==this.bigCard.id&&t.first==1);
     return tmp?this.users.find((u:any)=>u.id==tmp.user_id).nom:"Not yet Titled";
   }
   getCELeft()
@@ -1483,13 +1483,14 @@ export class AppComponent implements OnInit
       servants = vente.price_servants;
       titles = vente.price_titles;
       truetitles = vente.price_truetitles;
+
+      if(quartz>0)
+      {
+        this.FATEset("UPDATE fate2_users SET quartz=quartz-"+quartz+" WHERE id="+userid);
+        this.FATEset("UPDATE fate2_users SET quartz=quartz+"+quartz+" WHERE id="+boughtuserid);
+      }
     }
 
-    if(quartz>0)
-    {
-      this.FATEset("UPDATE fate2_users SET quartz=quartz-"+quartz+" WHERE id="+userid);
-      this.FATEset("UPDATE fate2_users SET quartz=quartz+"+quartz+" WHERE id="+boughtuserid);
-    }
     if(servants.length>0)
     {
       for(let i=0;i<servants.length;i++)
@@ -1498,7 +1499,7 @@ export class AppComponent implements OnInit
         this.FATEset("UPDATE fate2_servants SET qte=qte-1 WHERE servant_id="+s.id+" AND user_id="+userid).subscribe((d:any)=>{
           if(i==servants.length-1)
           {
-            this.FATEset("DELETE FROM fate2_servants WHERE qte=0").subscribe((d:any)=>{
+            this.FATEset("DELETE FROM fate2_servants WHERE qte<=0").subscribe((d:any)=>{
               this.FATEget(this.sqlGetServants).subscribe((servants:any)=>{
                 this.setServants(servants);
               })
@@ -1516,7 +1517,7 @@ export class AppComponent implements OnInit
         this.FATEset("UPDATE fate_title SET qte=qte-1 WHERE servant_id="+s.id+" AND user_id="+userid).subscribe((d:any)=>{
           if(i==titles.length-1)
           {
-            this.FATEset("DELETE FROM fate_title WHERE qte=0").subscribe((d:any)=>{
+            this.FATEset("DELETE FROM fate_title WHERE qte<=0").subscribe((d:any)=>{
               this.FATEget(this.sqlGetTitle).subscribe((titles:any)=>{
                 this.titles = titles;
                 this.clear(this.titles);
@@ -1535,7 +1536,7 @@ export class AppComponent implements OnInit
         this.FATEset("UPDATE fate_title SET qte=qte-1, first=0 WHERE servant_id="+s.id+" AND user_id="+userid).subscribe((d:any)=>{
           if(i==servants.length-1)
           {
-            this.FATEset("DELETE FROM fate_title WHERE qte=0").subscribe((d:any)=>{
+            this.FATEset("DELETE FROM fate_title WHERE qte<=0").subscribe((d:any)=>{
               this.FATEget(this.sqlGetTitle).subscribe((titles:any)=>{
                 this.titles = titles;
                 this.clear(this.titles);
