@@ -771,3 +771,40 @@ height: 100%;
 .pvm *{
     transition:unset;
 }
+.bonusQuartz
+{
+    position: absolute;
+    z-index: 99 !important;
+    width: 50px;
+    height: 50px;
+    filter: drop-shadow(0px 0px 6px black) !important;
+    pointer-events: all;
+}
+
+
+.options img{
+    width:50px;
+    height:50px;
+}
+
+.optionsbtn
+{
+    width:90px;
+    margin:10px;
+    height:auto;
+}
+.options
+{
+    width: 300px;
+  height: 50px;
+  top: 90px;
+  position: absolute;
+  right: 0px;
+  padding: 10px;
+}
+.active{
+    filter:drop-shadow(0px 0px 2px green);
+}
+.inactive{
+    filter:drop-shadow(0px 0px 2px red);
+}

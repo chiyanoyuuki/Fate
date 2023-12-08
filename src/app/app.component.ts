@@ -87,6 +87,9 @@ export class AppComponent implements OnInit
   //HEADER
   public successToClaim:any = [];
   public showSuccess = false;
+  public showOptions = false;
+  public musicSound = true;
+  public allSound = true;
   //PROFILE
   public userProfile:any;
   public selectionPerso:any = undefined;
@@ -109,6 +112,8 @@ export class AppComponent implements OnInit
 
   public bgmusic: any;
   public sonbtn: any;
+  //BONUS
+  public bonus: any = {};
 
   constructor(private http: HttpClient){}
   ngOnInit()
@@ -123,12 +128,30 @@ export class AppComponent implements OnInit
     this.sonbtn.src = "./assets/confirm_button.mp3";
     this.sonbtn.load();
     this.sonbtn.volume = 0.5;
+
+    this.bonus.timer = this.getBonus();
     /*this.persos.push(this.data.find((d:any)=>d.id==2));
     this.persos.push(this.data.find((d:any)=>d.id==11));
     this.persos.push(this.data.find((d:any)=>d.id==0));
     this.persos.push(this.data.find((d:any)=>d.id==75));
     this.persos.push(this.data.find((d:any)=>d.id==151));
     this.changePerso(); */
+  }
+  getBonus()
+  {
+    return Math.round(Math.random()*1000*60)+(1000*30);
+  }
+  clickBonus()
+  {
+    let val = 1;
+    if(Math.round(Math.random()*100)==50)val = 10;
+    else if(Math.round(Math.random()*1000)==500)val = 30;
+    this.FATEset("UPDATE fate2_users SET quartz = quartz + 1 WHERE id="+this.user.id).subscribe((d:any)=>{
+      this.bonus.life = -1;
+      this.FATEget(this.sqlGetUsers).subscribe((users:any)=>{
+        this.setUser(users);
+      });
+    });
   }
   changePerso()
   {
@@ -321,6 +344,37 @@ export class AppComponent implements OnInit
       this.setPvm(data[6]);
       if(!this.mainInterval)this.startMainInterval();
     })
+  }
+  clickSound(type:string)
+  {
+    if(type=="all")
+    {
+      this.allSound = !this.allSound;
+      if(!this.allSound)
+      {
+        
+        this.bgmusic.volume=0;
+        this.sonbtn.volume=0;
+      }
+      else
+      {
+        if(this.musicSound)this.bgmusic.volume=0.1;
+        this.sonbtn.volume=0.5;
+      }
+    }
+    else
+    {
+      this.musicSound = !this.musicSound;
+      if(!this.allSound)return;
+      if(!this.musicSound)
+      {
+        this.bgmusic.volume=0;
+      }
+      else
+      {
+        this.bgmusic.volume=0.1;
+      }
+    }
   }
   getServsFromIds(tab:any)
   {
@@ -563,10 +617,21 @@ export class AppComponent implements OnInit
     this.mainInterval = setInterval(() => {
         this.timeToChangeBanner -= 1000;
         this.timeToRefresh -= 1000;
+        this.bonus.timer -= 1000;
+        this.bonus.life -= 1000;
 
         if(this.timeToChangeBanner<0){this.generateBanner(false);}
         if(this.timeToRefresh<0){this.initData(false);}
+        if(this.bonus.timer<0){this.spawnBonus();}
     },1000);
+  }
+  spawnBonus()
+  {
+    this.sonbtn.play();
+    this.bonus.timer=this.getBonus();
+    this.bonus.life=8000;
+    this.bonus.x = 5 + Math.round(Math.random()*90);
+    this.bonus.y = 5 + Math.round(Math.random()*90);
   }
   //MENU
   clickMenu(menu:any)
@@ -1459,9 +1524,25 @@ export class AppComponent implements OnInit
       this.titles = data[2];
       this.clear(this.titles);
       this.setShop(data[3]);
+      vente = data[3].find((v:any)=>v.id==vente.id);
       if(!this.cantbuy(vente))
       {
-        this.FATEset("UPDATE fate2_shop SET bought_user_id="+this.user.id+" WHERE id="+vente.id);
+        this.FATEset("UPDATE fate2_shop SET bought_user_id="+this.user.id+" WHERE id="+vente.id).subscribe((d:any)=>{
+          this.FATEmultiple(
+            "["
+            + "\"" +  this.sqlGetUsers  + "\"" + ","
+            + "\"" +  this.sqlGetServants  + " WHERE user_id = "+ this.user.id + "\"" + ","
+            + "\"" +  this.sqlGetTitle + "\"" + ","
+            + "\"" +  this.sqlGetShop + "\""
+          + "]"
+          ).subscribe((data:any)=>{
+            this.setUser(data[0]);
+            this.setServants(data[1]);
+            this.titles = data[2];
+            this.clear(this.titles);
+            this.setShop(data[3]);
+          });
+        });
         this.managesell(vente,'prop');
         this.managesell(vente,'price');
       }
