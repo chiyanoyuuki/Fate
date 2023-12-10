@@ -88,7 +88,7 @@ export class AppComponent implements OnInit
   public successToClaim:any = [];
   public showSuccess = false;
   public showOptions = false;
-  public musicSound = true;
+  public musicSound = false;
   public allSound = true;
   //PROFILE
   public userProfile:any;
@@ -121,7 +121,7 @@ export class AppComponent implements OnInit
     this.bgmusic = new Audio();
     this.bgmusic.src = "./assets/Chaldea.ogg";
     this.bgmusic.load();
-    this.bgmusic.volume = 0.1;
+    this.bgmusic.volume = 0;
     this.bgmusic.loop = true;
 
     this.sonbtn = new Audio();
@@ -143,8 +143,8 @@ export class AppComponent implements OnInit
   }
   clickBonus()
   {
+    this.bonus.life = -1;
     this.FATEset("UPDATE fate2_users SET quartz = quartz + " + this.bonus.val + ", clickedQuartz = clickedQuartz + " + this.bonus.val + " WHERE id="+this.user.id).subscribe((d:any)=>{
-      this.bonus.life = -1;
       this.FATEget(this.sqlGetUsers).subscribe((users:any)=>{
         this.setUser(users);
       });

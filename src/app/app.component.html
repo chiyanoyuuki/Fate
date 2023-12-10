@@ -314,6 +314,15 @@
         </div>
       </div>
     </div>
+    <!--<pvp-->
+      <div *ngIf="page=='pvp'" class="pvp">
+        <div class="bloc conteneur noflex">
+          <div>
+            <p>Click Quartz</p>
+            <button>Find a match</button>
+          </div>
+        </div>
+      </div>
     <!--<SHOP-->
     <div *ngIf="page=='shop'" class="shop">
       <div class="bloc filters noflex">
@@ -583,7 +592,7 @@
   </div>
   <!--<footer-->
   <div class="footer">
-    <!--<img draggable="false" (click)="clickMenu('pvm')" src="./assets/images/pvmButton.png"/>-->
+    <img draggable="false" (click)="clickMenu('pvp')" src="./assets/images/pvpButton.png"/>
     <img draggable="false" (click)="clickMenu('formation')" src="./assets/images/formationButton.png"/>
     <img draggable="false" (click)="clickMenu('banner')" src="./assets/images/summonButton.png"/>
     <img draggable="false" (click)="clickMenu('friends')" src="./assets/images/friendsButton.png"/>
