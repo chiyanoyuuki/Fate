@@ -113,7 +113,7 @@ export class AppComponent implements OnInit
   public bgmusic: any;
   public sonbtn: any;
   //BONUS
-  public bonus: any = {};
+  public bonus: any = {val:30,y:30,x:30};
 
   constructor(private http: HttpClient){}
   ngOnInit()
@@ -143,10 +143,7 @@ export class AppComponent implements OnInit
   }
   clickBonus()
   {
-    let val = 1;
-    if(Math.round(Math.random()*100)==50)val = 10;
-    else if(Math.round(Math.random()*1000)==500)val = 30;
-    this.FATEset("UPDATE fate2_users SET quartz = quartz + 1 WHERE id="+this.user.id).subscribe((d:any)=>{
+    this.FATEset("UPDATE fate2_users SET quartz = quartz + " + this.bonus.val + ", clickedQuartz = clickedQuartz + " + this.bonus.val + " WHERE id="+this.user.id).subscribe((d:any)=>{
       this.bonus.life = -1;
       this.FATEget(this.sqlGetUsers).subscribe((users:any)=>{
         this.setUser(users);
@@ -603,7 +600,7 @@ export class AppComponent implements OnInit
   }
   recupererCagnotte()
   {
-    this.FATEset("UPDATE fate2_users SET quartz = quartz + "+this.cagnotte+", cagnotte = CURRENT_TIMESTAMP WHERE id = "+this.user.id).subscribe((data)=>{
+    this.FATEset("UPDATE fate2_users SET quartz = quartz + "+this.cagnotte+", cagnotte = CURRENT_TIMESTAMP WHERE id = "+this.user.id+" and DATE_ADD(cagnotte, INTERVAL 1 MINUTE) <= NOW()").subscribe((data)=>{
       this.cagnotte=0;
       this.FATEget(this.sqlGetUsers).subscribe((users:any)=>{
         this.setUser(users);
@@ -632,6 +629,9 @@ export class AppComponent implements OnInit
     this.bonus.life=8000;
     this.bonus.x = 5 + Math.round(Math.random()*90);
     this.bonus.y = 5 + Math.round(Math.random()*90);
+    this.bonus.val = 1;
+    if(Math.round(Math.random()*100)==50)this.bonus.val = 10;
+    else if(Math.round(Math.random()*1000)==500)this.bonus.val = 30;
   }
   //MENU
   clickMenu(menu:any)
