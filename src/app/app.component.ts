@@ -78,7 +78,7 @@ export class AppComponent implements OnInit
   public videoInterval:any;
   public servantInvoquing:any;
   //FORMATIONS
-  public formationFilters = ["Alter Ego", "Archer", "Assassin","Avenger","Beast","Berserker","Caster","Foreigner","Lancer","Moon Cancer","Pretender","Rider","Ruler","Saber","Shielder", "","Servants 5*","Servants 4*","First Titles","Titles","Doublons","","Originaux","Not Titled"];
+  public formationFilters = ["Alter Ego", "Archer", "Assassin","Avenger","Beast","Berserker","Caster","Foreigner","Lancer","Moon Cancer","Pretender","Rider","Ruler","Saber","Shielder", "","Servants 5*","Servants 4*","All First Titles", "My First Titles","Titles","Doublons","","Originaux","Not Titled"];
   public filters: any = [];
   public filterSpec: any;
   public formationServants: any = [];
@@ -630,8 +630,10 @@ export class AppComponent implements OnInit
     this.bonus.x = 5 + Math.round(Math.random()*90);
     this.bonus.y = 5 + Math.round(Math.random()*90);
     this.bonus.val = 1;
-    if(Math.round(Math.random()*100)==50)this.bonus.val = 10;
-    else if(Math.round(Math.random()*1000)==500)this.bonus.val = 30;
+    if(Math.round(Math.random()*50)==5)this.bonus.val = 3;
+    else if(Math.round(Math.random()*50)==5)this.bonus.val = 6;
+    else if(Math.round(Math.random()*100)==50)this.bonus.val = 12;
+    else if(Math.round(Math.random()*200)==50)this.bonus.val = 30;
   }
   //MENU
   clickMenu(menu:any)
@@ -986,7 +988,11 @@ export class AppComponent implements OnInit
     {
       if(this.filterSpec=="Servants 5*"){this.formationServants = this.formationServants.filter((f:any)=>f.level==5);}
       else if(this.filterSpec=="Servants 4*"){this.formationServants = this.formationServants.filter((f:any)=>f.level==4);}
-      else if(this.filterSpec=="First Titles"){
+      else if(this.filterSpec=="All First Titles"){
+        let titles = this.titles.filter((t:any)=>t.first==1);
+        this.formationServants = this.data.filter((d:any)=>titles.find((t:any)=>t.servant_id==d.id));
+      }
+      else if(this.filterSpec=="My First Titles"){
         let titles = mytitles.filter((t:any)=>t.first==1);
         this.formationServants = this.data.filter((d:any)=>titles.find((t:any)=>t.servant_id==d.id));
       }

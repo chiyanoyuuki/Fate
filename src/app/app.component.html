@@ -1,4 +1,4 @@
-<img *ngIf="bonus.life>0" class="clickable bonusQuartz" [class.epique]="bonus.val==10" [class.leg]="bonus.val==30" [style.left.%]="bonus.x" [style.top.%]="bonus.y" (click)="clickBonus()" src="./assets/images/quartz.png"/>
+<img *ngIf="bonus.life>0" class="clickable bonusQuartz" [class.uncommon]="bonus.val==3" [class.rare]="bonus.val==6" [class.epique]="bonus.val==12" [class.leg]="bonus.val==30" [style.left.%]="bonus.x" [style.top.%]="bonus.y" (click)="clickBonus()" src="./assets/images/quartz.png"/>
 
 <p style="position:absolute;top:0px;left:0px;opacity:0.5;z-index:99">V2.10</p>
 <img class="background" draggable="false" src="./assets/images/{{background}}.png"/>
